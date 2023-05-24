@@ -1,0 +1,30 @@
+syntax = "proto3";
+package TFGProtocol;
+
+import "google/protobuf/timestamp.proto";
+option csharp_namespace = "TFG.Protobuf";
+
+message DadaGenerada 
+{
+	double valor=1;
+	google.protobuf.Timestamp dataGeneracio=2;
+}
+
+message DadaTractada
+{
+	string valor=1;
+	google.protobuf.Timestamp dataGeneracio=2;
+}
+
+message DatesConsulta
+{
+	google.protobuf.Timestamp dataInici=1;
+	google.protobuf.Timestamp dataFi=2;
+}
+
+message RespostaDades
+{
+	repeated DadaTractada Dades=1;
+}
+
+
