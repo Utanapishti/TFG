@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ProtobufMessages">
+      <UniqueIdentifier>{34b4124b-6b88-47dc-964f-d22ece7fb4c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ProtobufMessages\google">
+      <UniqueIdentifier>{7ac4dfed-8001-4fd8-b15e-21614e0a8186}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ProtobufMessages\google\protobuf">
+      <UniqueIdentifier>{ab60d4cc-f736-4bee-ab8e-aded9ab0e076}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)..\TractamentDades\ProtobufMessages\google\protobuf\any.proto">
+      <Filter>ProtobufMessages\google\protobuf</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)..\TractamentDades\ProtobufMessages\google\protobuf\api.proto">
+      <Filter>ProtobufMessages\google\protobuf</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)..\TractamentDades\ProtobufMessages\google\protobuf\descriptor.proto">
+      <Filter>ProtobufMessages\google\protobuf</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)..\TractamentDades\ProtobufMessages\google\protobuf\duration.proto">
+      <Filter>ProtobufMessages\google\protobuf</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)..\TractamentDades\ProtobufMessages\google\protobuf\empty.proto">
+      <Filter>ProtobufMessages\google\protobuf</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)..\TractamentDades\ProtobufMessages\google\protobuf\field_mask.proto">
+      <Filter>ProtobufMessages\google\protobuf</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)..\TractamentDades\ProtobufMessages\google\protobuf\source_context.proto">
+      <Filter>ProtobufMessages\google\protobuf</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)..\TractamentDades\ProtobufMessages\google\protobuf\struct.proto">
+      <Filter>ProtobufMessages\google\protobuf</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)..\TractamentDades\ProtobufMessages\google\protobuf\timestamp.proto">
+      <Filter>ProtobufMessages\google\protobuf</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)..\TractamentDades\ProtobufMessages\google\protobuf\type.proto">
+      <Filter>ProtobufMessages\google\protobuf</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)..\TractamentDades\ProtobufMessages\google\protobuf\wrappers.proto">
+      <Filter>ProtobufMessages\google\protobuf</Filter>
+    </None>
+  </ItemGroup>
+</Project>

@@ -27,7 +27,7 @@ namespace Generador
             {
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
                 var valor = _dataGenerator.GetValue();
-                _publisher.Publish(Protocol.Protocol.GeneratePayload(new TipusDades.DadaGenerada(valor, DateTime.Now)));
+                _publisher.Publish(ProtocolDadaGenerada.GeneratePayload(new TipusDades.DadaGenerada(valor, DateTime.Now)));
                 await Task.Delay(_delay, stoppingToken);
             }
         }
