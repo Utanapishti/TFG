@@ -1,23 +1,25 @@
-FROM python
-
+FROM python:3-alpine
 
 RUN mkdir /service
 
-COPY ../protobufs/ /service/protobufs/
+COPY Protobufs/ /service/protobufs/
 
-COPY tractament/ /service/tractament/
+COPY TractamentDades/requirements.txt /service
 
-WORKDIR /service/tractament
+WORKDIR /service
 
 RUN python -m pip install --upgrade pip
 
 RUN python -m pip install -r requirements.txt
 
-RUN python -m grpc_tools.protoc -I ../protobufs --python_out=. \
+RUN apk add --no-cache protoc
 
-           --grpc_python_out=. ../protobufs/tractament.proto
+COPY TractamentDades/tractament/ /service/tractament/
 
-           S
+RUN protoc -I=./protobufs --python_out=./tractament ./protobufs/missatges.proto
+
+WORKDIR /service/tractament
+           
 EXPOSE 50051
 
 ENTRYPOINT [ "python", "tractamentDades.py" ]

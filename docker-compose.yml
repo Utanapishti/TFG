@@ -6,3 +6,28 @@ services:
     build:
       context: .
       dockerfile: Generador/Dockerfile
+    depends_on:
+      - 'rabbitmq'
+    networks:
+        - sensor_net
+
+  tractament:    
+    image: tractament    
+    depends_on:
+      - 'rabbitmq'
+    networks:
+        - sensor_net
+    environment:
+        - PYTHONUNBUFFERED=1
+
+  rabbitmq:    
+    image: rabbitmq    
+    ports:        
+        - 5672:5672
+        - 15672:15672
+    networks:
+        - sensor_net
+
+networks:
+  sensor_net:
+    name: sensor_net

@@ -42,7 +42,7 @@ namespace SensorReader
 
                 lock (_lockConnection)
                 {
-                    _policy = RetryPolicy.Handle<SocketException>()
+                    _policy = RetryPolicy.Handle<Exception>()
                         .WaitAndRetryForever((i) => retryTime);
 
                     _policy.Execute(() =>

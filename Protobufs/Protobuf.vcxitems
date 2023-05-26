@@ -14,7 +14,6 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)Missatges.proto" />
-    <None Include="$(MSBuildThisFileDirectory)protoc.exe" />
+    <None Include="$(MSBuildThisFileDirectory)missatges.proto" />
   </ItemGroup>
 </Project>
