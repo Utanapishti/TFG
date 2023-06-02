@@ -33,7 +33,7 @@ namespace Messaging
                 //model.QueueDeclare(_options.Channel);
                 _properties = model.CreateBasicProperties();
                 _properties.DeliveryMode = 2;
-                model.ExchangeDeclare(exchange: _options.Exchange, type: ExchangeType.Topic);
+                model.ExchangeDeclare(exchange: _options.Exchange, type: ExchangeType.Direct);
             }
         }
 

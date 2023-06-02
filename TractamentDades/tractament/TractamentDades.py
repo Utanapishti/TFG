@@ -1,20 +1,32 @@
 
+from email import message
 import pika
 import time
 from datetime import datetime
 import json
+import missatges_pb2
 
 def callback(ch, method, properties, body):
     print(" [x] Received %r" % body)
+    dadaRebuda = missatges_pb2.DadaGenerada()
+    dadaRebuda.ParseFromString(body)
+    print(" %r",dadaRebuda.valor)
+    print(" %r",dadaRebuda.dataGeneracio)
 
 try:
     configFile = open("appsettings.json")
-    config = json.load(configFile)
-    configRabbitMQ=config['RabbitMQ']
+    config = json.load(configFile)    
 except:
-    print("Could not read appsettings.json")
-    while True:
-        time.sleep(30)
+    print("Could not read appsettings.json")    
+    config=json.loads("""{
+	"RabbitMQ": {
+		"Host": "localhost",
+		"Port": 5672,
+		"Exchange": "SENSOR_NET",
+		"Channel": "dadesGenerades"
+	}
+}""")
+configRabbitMQ=config['RabbitMQ']
 while True:
     try:
         connection = pika.BlockingConnection(pika.ConnectionParameters(host=configRabbitMQ['Host'],port=configRabbitMQ['Port']))

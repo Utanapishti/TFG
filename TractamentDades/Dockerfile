@@ -12,6 +12,8 @@ RUN python -m pip install --upgrade pip
 
 RUN python -m pip install -r requirements.txt
 
+RUN pip install protobuf
+
 RUN apk add --no-cache protoc
 
 COPY TractamentDades/tractament/ /service/tractament/

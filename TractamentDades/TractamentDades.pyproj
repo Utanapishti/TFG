@@ -25,6 +25,7 @@
     <Compile Include="Dockerfile">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="tractament\missatges_pb2.py" />
     <Compile Include="tractament\tractamentDades.py" />
   </ItemGroup>
   <ItemGroup>
@@ -32,7 +33,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="requirements.txt" />
-    <None Include="tractament\appsettings.json" />
+    <Resource Include="tractament\appsettings.json">
+      <Publish>True</Publish>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env\">
