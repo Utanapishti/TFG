@@ -24,9 +24,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Protobuf", "Protobufs\Proto
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magatzem", "Magatzem\Magatzem.csproj", "{A2900CB2-DF66-4D72-98B8-0B9D2A8856B1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scripting", "Scripting\Scripting.csproj", "{6912B95B-A071-4022-9C05-829BE64462F7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestorCalculs", "GestorCalculs\GestorCalculs.csproj", "{0979F357-B2D9-41F1-ACA0-4279083876B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestorCalculs", "GestorCalculs\GestorCalculs.csproj", "{0979F357-B2D9-41F1-ACA0-4279083876B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,10 +58,6 @@ Global
 		{A2900CB2-DF66-4D72-98B8-0B9D2A8856B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2900CB2-DF66-4D72-98B8-0B9D2A8856B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2900CB2-DF66-4D72-98B8-0B9D2A8856B1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6912B95B-A071-4022-9C05-829BE64462F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6912B95B-A071-4022-9C05-829BE64462F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6912B95B-A071-4022-9C05-829BE64462F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6912B95B-A071-4022-9C05-829BE64462F7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0979F357-B2D9-41F1-ACA0-4279083876B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0979F357-B2D9-41F1-ACA0-4279083876B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0979F357-B2D9-41F1-ACA0-4279083876B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
