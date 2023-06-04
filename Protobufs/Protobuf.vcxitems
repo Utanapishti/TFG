@@ -15,6 +15,5 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)missatges.proto" />
-    <None Include="$(MSBuildThisFileDirectory)missatgesRPC.proto" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 ﻿namespace GRPC
 {
-    public class RPCService
+    public class RPCService:TFG.Protobuf.GRPC.
     {
 
     }

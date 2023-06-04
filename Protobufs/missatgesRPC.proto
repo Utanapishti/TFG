@@ -3,14 +3,4 @@ package TFGProtocol;
 
 option csharp_namespace = "TFG.Protobuf.GRPC";
 
-message PeticioValor
-{
-	string nomVariable = 1;
-}
-
-message RespostaPeticioValor
-{
-	double valor=1;	
-	uint32 timestampRebut=2;
-}
 

@@ -43,3 +43,14 @@ message RespostaDades
 }
 
 
+message PeticioValor
+{
+	string nomVariable = 1;
+}
+
+message RespostaPeticioValor
+{
+	double valor=1;	
+	uint32 timestampRebut=2;
+}
+
