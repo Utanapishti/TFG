@@ -17,8 +17,7 @@
 
   <ItemGroup>
     <None Update="buildProtocol.sh">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>buildProtocol.cs</LastGenOutput>
+      <Generator></Generator>
     </None>
   </ItemGroup>
 

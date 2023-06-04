@@ -5,7 +5,7 @@
     <ProjectGuid>b462f2fd-5c57-4fa3-a3cb-454e0c768bc6</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>tractament\tractamentDades.py</StartupFile>
-    <SearchPath>C:\Users\alber\source\repos\TFG\TractamentDades\tractament</SearchPath>
+    <SearchPath>tractament</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>TractamentDades</Name>
@@ -27,6 +27,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="tractament\funcionsCalculVariables.py" />
+    <Compile Include="tractament\missatgesRPC_pb2.py" />
+    <Compile Include="tractament\missatgesRPC_pb2_grpc.py" />
     <Compile Include="tractament\missatges_pb2.py" />
     <Compile Include="tractament\tractamentDades.py" />
   </ItemGroup>

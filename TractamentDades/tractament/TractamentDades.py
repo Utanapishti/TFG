@@ -5,7 +5,10 @@ import pika
 import time
 from datetime import datetime
 import json
+import grpc
 import missatges_pb2
+import missatgesRPC_pb2
+import missatgesRPC_pb2_grpc
 import collections
 import funcionsCalculVariables
 
@@ -27,9 +30,10 @@ def callback(ch, method, properties, body):
         if variable.Timestamp < calculDada.timeStampActual:
             #Demanar valor
             #Crear nova variable amb valor i timestamp per no afectar les que s'estan calculant
+            print("Peticio valor")
         elif variable.Timestamp > calculDada.timeStampRebut:
             #Cancelar l'operacio, ja s'ha calculat aquesta variable en el futur        
-
+            print("Variable futura")
         parametres[nomParametre]=variable.Valor
     #Calcular
     #Actualitzar valors variables de tots els parametres
@@ -53,7 +57,13 @@ class ValorVariable:
             Timestamp=timestamp
         
 
-try:
+channel = grpc.insecure_channel('127.0.0.1:5098')
+stub = missatgesRPC_pb2_grpc.ValorServiceStub(channel)
+peticio = missatgesRPC_pb2.PeticioValor()
+peticio.nomVariable="TEST"
+resultat = stub.Valor(peticio);
+
+try:        
     configFile = open("appsettings.json")
     config = json.load(configFile)    
     configFunctions = json.load(open("functionsDefinition.json"))

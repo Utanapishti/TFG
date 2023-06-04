@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GestorCalculs\GestorCalculs.csproj" />
+    <ProjectReference Include="..\GRPCServer\GRPCServer.csproj" />
     <ProjectReference Include="..\Messaging\RabbitMQMessaging.csproj" />
     <ProjectReference Include="..\Protocol\Protocol.csproj" />
   </ItemGroup>
