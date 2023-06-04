@@ -5,11 +5,48 @@ services:
     image: ${DOCKER_REGISTRY-}generador
     build:
       context: .
-      dockerfile: Generador/Dockerfile
+      dockerfile: Generador/Dockerfile    
+    environment:
+        Generador__Name: PIE1_RES
     depends_on:
       - 'rabbitmq'
     networks:
-        - sensor_net
+      - sensor_net
+ 
+  generadorPeriode:
+    image: ${DOCKER_REGISTRY-}generador
+    build:
+      context: .
+      dockerfile: Generador/Dockerfile    
+    environment:
+        Generador__Name: PIE1_PER
+    depends_on:
+      - 'rabbitmq'
+    networks:
+      - sensor_net
+
+  generadorPressioAtmosferica:
+    image: ${DOCKER_REGISTRY-}generador
+    build:
+      context: .
+      dockerfile: Generador/Dockerfile    
+    environment:
+        Generador__Name: METEO_PRE
+    depends_on:
+      - 'rabbitmq'
+    networks:
+      - sensor_net
+
+ 
+  magatzem:
+    image: ${DOCKER_REGISTRY-}magatzem
+    build:
+      context: .
+      dockerfile: Magatzem/Dockerfile
+    depends_on:
+      - 'rabbitmq'
+    networks:
+      - sensor_net
 
   tractament:    
     image: tractament    

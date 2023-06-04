@@ -1,0 +1,1 @@
+﻿./protoc --proto_path ../Protobufs --python_out=./tractament missatges.proto

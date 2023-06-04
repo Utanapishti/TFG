@@ -9,7 +9,7 @@ namespace GestorCalculs
     internal class Variable
     {
         public string Nom { get; }
-        LinkedList<Dada> lectures = new LinkedList<Dada>();
+        LinkedList<Dada> dades = new LinkedList<Dada>();
 
         public Variable(string nom)
         {
@@ -19,16 +19,21 @@ namespace GestorCalculs
         internal Dada AfegirDada(uint ts, double valor)
         {
             var novaDada = new Dada(valor, ts);
-            lectures.AddLast(novaDada);
+            dades.AddLast(novaDada);
             return novaDada;
         }
 
-        internal uint GetLastTimestamp()
+        internal uint GetUltimTimestamp()
         {
-            if (lectures.Count == 0) { return 0; }
-            else return lectures.Last().Timestamp;
+            if (dades.Count == 0) { return 0; }
+            else return dades.Last().Timestamp;
+        }
+
+        internal Dada GetUltimaDada()
+        {
+            return dades.Last();
         }
     }
 
-    internal record Dada(double Valor, uint Timestamp);    
+    public record Dada(double Valor, uint Timestamp);    
 }

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace TipusDades
 {
-    public record DadaGenerada(double Valor, DateTime DataGeneracio);
-    public record DadaTractada(string Valor, DateTime DataGeneracio);
+    public record DadaGenerada(string Name,double Valor);    
+    public record Dada(double valor);
     public record DatesConsulta(DateTime DataInici, DateTime DataFi);
-    public record RespostaDades(IEnumerable<DadaTractada> Dades);
+    public record RespostaDades(IEnumerable<Dada> Dades);
 }

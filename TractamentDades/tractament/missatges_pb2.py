@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0fmissatges.proto\x12\x0bTFGProtocol\x1a\x1fgoogle/protobuf/timestamp.proto\"P\n\x0c\x44\x61\x64\x61Generada\x12\r\n\x05valor\x18\x01 \x01(\x01\x12\x31\n\rdataGeneracio\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"P\n\x0c\x44\x61\x64\x61Tractada\x12\r\n\x05valor\x18\x01 \x01(\t\x12\x31\n\rdataGeneracio\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"j\n\rDatesConsulta\x12-\n\tdataInici\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12*\n\x06\x64\x61taFi\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"9\n\rRespostaDades\x12(\n\x05\x44\x61\x64\x65s\x18\x01 \x03(\x0b\x32\x19.TFGProtocol.DadaTractadaB\x0f\xaa\x02\x0cTFG.Protobufb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0fmissatges.proto\x12\x0bTFGProtocol\x1a\x1fgoogle/protobuf/timestamp.proto\"0\n\x0c\x44\x61\x64\x61Generada\x12\r\n\x05valor\x18\x01 \x01(\x01\x12\x11\n\tnomSensor\x18\x02 \x01(\t\"\x83\x01\n\nCalculDada\x12\x18\n\x10VariableCalcular\x18\x01 \x01(\t\x12\x16\n\x0eVariableRebuda\x18\x02 \x01(\t\x12\x12\n\nvalorRebut\x18\x03 \x01(\x01\x12\x16\n\x0etimeStampRebut\x18\x04 \x01(\r\x12\x17\n\x0ftimeStampActual\x18\x05 \x01(\r\"\x15\n\x04\x44\x61\x64\x61\x12\r\n\x05valor\x18\x01 \x01(\x01\"j\n\rDatesConsulta\x12-\n\tdataInici\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12*\n\x06\x64\x61taFi\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"1\n\rRespostaDades\x12 \n\x05\x44\x61\x64\x65s\x18\x01 \x03(\x0b\x32\x11.TFGProtocol.DadaB\x0f\xaa\x02\x0cTFG.Protobufb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -24,11 +24,13 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'\252\002\014TFG.Protobuf'
   _globals['_DADAGENERADA']._serialized_start=65
-  _globals['_DADAGENERADA']._serialized_end=145
-  _globals['_DADATRACTADA']._serialized_start=147
-  _globals['_DADATRACTADA']._serialized_end=227
-  _globals['_DATESCONSULTA']._serialized_start=229
-  _globals['_DATESCONSULTA']._serialized_end=335
-  _globals['_RESPOSTADADES']._serialized_start=337
-  _globals['_RESPOSTADADES']._serialized_end=394
+  _globals['_DADAGENERADA']._serialized_end=113
+  _globals['_CALCULDADA']._serialized_start=116
+  _globals['_CALCULDADA']._serialized_end=247
+  _globals['_DADA']._serialized_start=249
+  _globals['_DADA']._serialized_end=270
+  _globals['_DATESCONSULTA']._serialized_start=272
+  _globals['_DATESCONSULTA']._serialized_end=378
+  _globals['_RESPOSTADADES']._serialized_start=380
+  _globals['_RESPOSTADADES']._serialized_end=429
 # @@protoc_insertion_point(module_scope)

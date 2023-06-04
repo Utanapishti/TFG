@@ -15,7 +15,7 @@ namespace Protocol
         {
             TFG.Protobuf.DadaGenerada message = new TFG.Protobuf.DadaGenerada();
             message.Valor=dada.Valor;
-            message.DataGeneracio=Timestamp.FromDateTime(dada.DataGeneracio);
+            message.NomSensor = dada.Name;
             return MessageExtensions.ToByteArray(message);
         }
         
@@ -23,11 +23,12 @@ namespace Protocol
         {
             var message = TFG.Protobuf.DadaGenerada.Parser.ParseFrom(payload);
 
-            return new DadaGenerada(message.Valor, message.DataGeneracio.ToDateTime());            
+            return new DadaGenerada(message.NomSensor, message.Valor);
         }
     }
 
-    public static class ProtocolDadaTractada
+
+    /*public static class ProtocolDadaTractada
     {
         public static byte[] GeneratePayload(DadaTractada dada)
         {
@@ -43,7 +44,7 @@ namespace Protocol
 
             return new DadaTractada(message.Valor, message.DataGeneracio.ToDateTime());
         }
-    }
+    }*/
 
     public static class ProtocolDatesConsulta
     {
@@ -68,10 +69,9 @@ namespace Protocol
         public static byte[] GeneratePayload(RespostaDades resposta)
         {
             TFG.Protobuf.RespostaDades message = new TFG.Protobuf.RespostaDades();
-            message.Dades.AddRange(resposta.Dades.Select(dada => new TFG.Protobuf.DadaTractada()
-            {
-                DataGeneracio = Timestamp.FromDateTime(dada.DataGeneracio),
-                Valor = dada.Valor
+            message.Dades.AddRange(resposta.Dades.Select(dada => new TFG.Protobuf.Dada()
+            {                
+                Valor = dada.valor
             }));
             return MessageExtensions.ToByteArray(message);
         }

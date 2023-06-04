@@ -3,12 +3,16 @@
     "Generador": {
       "commandName": "Project",
       "environmentVariables": {
-        "DOTNET_ENVIRONMENT": "Development"
+        "DOTNET_ENVIRONMENT": "Development",
+        "Generador_Name": "resistencia"
       },
       "dotnetRunMessages": true
     },
     "Docker": {
-      "commandName": "Docker"
+      "commandName": "Docker",
+      "environmentVariables": {
+        "Generador_Name": "resistencia"
+      }
     }
   }
 }

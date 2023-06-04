@@ -7,13 +7,21 @@ option csharp_namespace = "TFG.Protobuf";
 message DadaGenerada 
 {
 	double valor=1;
-	google.protobuf.Timestamp dataGeneracio=2;
+	string nomSensor=2;
 }
 
-message DadaTractada
+message CalculDada
 {
-	string valor=1;
-	google.protobuf.Timestamp dataGeneracio=2;
+	string variableCalcular=1;
+	string variableRebuda=2;
+	double valorRebut=3;	
+	uint32 timeStampRebut=4;
+	uint32 timeStampActual=5;
+}
+
+message Dada
+{
+	double valor=1;	
 }
 
 message DatesConsulta
@@ -24,7 +32,7 @@ message DatesConsulta
 
 message RespostaDades
 {
-	repeated DadaTractada Dades=1;
+	repeated Dada Dades=1;
 }
 
 

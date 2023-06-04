@@ -8,9 +8,9 @@ namespace GestorCalculs
 {
     internal class GestorVariables
     {
-        Dictionary<string, Variable> variables = new Dictionary<string, Variable>();
+        Dictionary<string, Variable> variables = new Dictionary<string, Variable>();        
 
-        public uint GetLastTimestamp(string nomVariable)
+        public uint GetUltimTimestamp(string nomVariable)
         {
             if (!variables.TryGetValue(nomVariable, out var variable)) 
             {
@@ -18,11 +18,29 @@ namespace GestorCalculs
             }
             else
             {
-                return variable.GetLastTimestamp();
+                return variable.GetUltimTimestamp();
             }
         }
 
-        internal Variable GetVariable(string nomVariable)
+        internal Dada AfegirDada(string nomVariable, uint ts, double valor)
+        {
+            var variable=GetVariable(nomVariable);
+            return variable.AfegirDada(ts,valor);            
+        }
+
+        internal Dada? GetUltimaDada(string nomVariable)
+        {
+            if (!variables.TryGetValue(nomVariable, out var variable))
+            {
+                return null;
+            }
+            else
+            {
+                return variable.GetUltimaDada();
+            }
+        }
+
+        private Variable GetVariable(string nomVariable)
         {
             if (!variables.TryGetValue(nomVariable, out var variable))
             {

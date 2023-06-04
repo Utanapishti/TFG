@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Messaging
 {
-    public class PublisherOptions:ConnectionOptions
+    public class PublisherOptions : ConnectionOptions
     {
-        public string Channel{ get; set; } = "TEST";
+        public string Exchange { get; set; } = "SENSOR_NET";
     }
 }

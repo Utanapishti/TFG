@@ -22,7 +22,7 @@ namespace Messaging
         public Publisher(ILogger<RabbitMQConnection> logger, IOptions<PublisherOptions> options) : base(logger, options)
         {
             _options = options.Value;
-            _publicationAddress = new PublicationAddress(ExchangeType.Topic, _options.Exchange, _options.Channel);
+            _publicationAddress = new PublicationAddress(ExchangeType.Direct, _options.Exchange, _options.Channel);
         }
 
         public void CreatePublisher()

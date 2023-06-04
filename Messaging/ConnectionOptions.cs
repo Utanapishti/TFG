@@ -10,6 +10,6 @@ namespace SensorReader
     {        
         public string Host { get; set; }
         public int Port { get; set; }
-        public string Exchange { get; set; } = "SENSOR_NET";
+        public string Channel { get; set; } = "TEST";
     }
 }

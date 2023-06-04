@@ -1,0 +1,34 @@
+{
+  "FunctionsDefinition": {
+    "Functions": [
+      {
+        "ReturnValue": "PIE1_TEMP",
+        "Function": "TemperaturaPiezometre4500",
+        "Parameters": [
+          {
+            "Name": "resistencia",
+            "AssociatedValue": "PIE1_RES"
+          }
+        ]
+      },
+      {
+        "ReturnValue": "PIE1_PRE",
+        "Function": "PressioPiezometre4500",
+        "Parameters": [
+          {
+            "Name": "periode",
+            "AssociatedValue": "PIE1_PER"
+          },
+          {
+            "Name": "temperatura",
+            "AssociatedValue": "PIE1_TEMP"
+          },
+          {
+            "Name": "pressioAtmosferica",
+            "AssocitaedValue": "METEO_PRE"
+          }
+        ]
+      }
+    ]
+  }
+}

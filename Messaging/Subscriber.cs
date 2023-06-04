@@ -5,6 +5,7 @@ using RabbitMQ.Client.Events;
 using SensorReader;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Channels;
@@ -17,6 +18,7 @@ namespace Messaging
         SubscriberOptions _options;
         ILogger _logger;
         IModel model;
+        public event EventHandler<BasicDeliverEventArgs> Received;
 
         public Subscriber(ILogger<RabbitMQConnection> logger, IOptions<SubscriberOptions> options) : base(logger, options)
         {
@@ -29,11 +31,11 @@ namespace Messaging
             model = base.Connect();
             if (model != null)
             {
-                var queue = model.QueueDeclare();
-                foreach(var subscription in _options.Subscriptions)
+                var queue = model.QueueDeclare(_options.Channel, false, false, false, null);
+                /*foreach(var subscription in _options.Subscriptions)
                 {
-                    model.QueueBind(queue.QueueName,_options.Exchange, subscription);
-                }
+                    model.QueueBind(queue.QueueName,, subscription);
+                }*/
 
                 var consumer = new EventingBasicConsumer(model);
                 consumer.Received += Consumer_Received;
@@ -45,6 +47,7 @@ namespace Messaging
         private void Consumer_Received(object? sender, BasicDeliverEventArgs e)
         {
             _logger.LogInformation("Received: " + Encoding.UTF8.GetString(e.Body.ToArray()));
+            Received?.Invoke(this, e);
         }
     }
 }

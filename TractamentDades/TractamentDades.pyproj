@@ -25,6 +25,7 @@
     <Compile Include="Dockerfile">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="tractament\funcionsCalculVariables.py" />
     <Compile Include="tractament\missatges_pb2.py" />
     <Compile Include="tractament\tractamentDades.py" />
   </ItemGroup>
@@ -32,7 +33,10 @@
     <Folder Include="tractament\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="buildProtocol.sh" />
+    <Content Include="protoc.exe" />
     <Content Include="requirements.txt" />
+    <Content Include="tractament\functionsDefinition.json" />
     <Resource Include="tractament\appsettings.json">
       <Publish>True</Publish>
     </Resource>
