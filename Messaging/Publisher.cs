@@ -22,7 +22,7 @@ namespace Messaging
         public Publisher(ILogger<RabbitMQConnection> logger, IOptions<PublisherOptions> options) : base(logger, options)
         {
             _options = options.Value;
-            _publicationAddress = new PublicationAddress(ExchangeType.Direct, _options.Exchange, _options.Channel);
+            _publicationAddress = new PublicationAddress(ExchangeType.Direct, string.Empty, _options.Channel);
         }
 
         public void CreatePublisher()
@@ -30,10 +30,9 @@ namespace Messaging
             using var model = base.Connect();
             if (model != null)
             {
-                //model.QueueDeclare(_options.Channel);
+                model.QueueDeclare(_options.Channel, durable: true, exclusive: false, autoDelete: false);
                 _properties = model.CreateBasicProperties();
-                _properties.DeliveryMode = 2;
-                model.ExchangeDeclare(exchange: _options.Exchange, type: ExchangeType.Direct);
+                _properties.DeliveryMode = 2;                
             }
         }
 

@@ -15,8 +15,15 @@ message CalculDada
 	string variableCalcular=1;
 	string variableRebuda=2;
 	double valorRebut=3;	
-	uint32 timeStampRebut=4;
-	uint32 timeStampActual=5;
+	uint32 timestampRebut=4;
+	uint32 timestampActual=5;
+}
+
+message DadaCalculada
+{
+	string nomVariable = 1;
+	double valor = 2;
+	uint32 timestamp = 3;
 }
 
 message Dada

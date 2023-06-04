@@ -9,6 +9,6 @@ namespace Messaging
 {
     public class PublisherOptions : ConnectionOptions
     {
-        public string Exchange { get; set; } = "SENSOR_NET";
+        
     }
 }

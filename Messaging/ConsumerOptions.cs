@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Messaging
 {
-    public class SubscriberOptions:ConnectionOptions
+    public class ConsumerOptions:ConnectionOptions
     {
         public IEnumerable<string> Subscriptions { get; set; } = Enumerable.Empty<string>();
     }

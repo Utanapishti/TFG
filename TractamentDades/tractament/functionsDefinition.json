@@ -25,7 +25,7 @@
           },
           {
             "Name": "pressioAtmosferica",
-            "AssocitaedValue": "METEO_PRE"
+            "AssociatedValue": "METEO_PRE"
           }
         ]
       }

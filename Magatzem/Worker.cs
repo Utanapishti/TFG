@@ -9,10 +9,10 @@ namespace Magatzem
     {
         private readonly ILogger<Worker> _logger;
         private readonly Publisher _publisher;
-        private readonly Subscriber _subscriber;
+        private readonly Consumer _subscriber;
         private GestorFuncions _gestorFuncions;
 
-        public Worker(ILogger<Worker> logger,Publisher publisher,Subscriber subscriber,GestorFuncions gestorFuncions)
+        public Worker(ILogger<Worker> logger,Publisher publisher,Consumer subscriber,GestorFuncions gestorFuncions)
         {
             _gestorFuncions = gestorFuncions;
             _gestorFuncions.PeticioCalcul = PeticioCalcul;

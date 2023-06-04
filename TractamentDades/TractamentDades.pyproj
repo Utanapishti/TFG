@@ -5,13 +5,14 @@
     <ProjectGuid>b462f2fd-5c57-4fa3-a3cb-454e0c768bc6</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>tractament\tractamentDades.py</StartupFile>
-    <SearchPath>
-    </SearchPath>
+    <SearchPath>C:\Users\alber\source\repos\TFG\TractamentDades\tractament</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>TractamentDades</Name>
     <RootNamespace>TractamentDades</RootNamespace>
     <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,10 +37,12 @@
     <Content Include="buildProtocol.sh" />
     <Content Include="protoc.exe" />
     <Content Include="requirements.txt" />
-    <Content Include="tractament\functionsDefinition.json" />
-    <Resource Include="tractament\appsettings.json">
+    <Content Include="tractament\functionsDefinition.json">
       <Publish>True</Publish>
-    </Resource>
+    </Content>
+    <Compile Include="tractament\appsettings.json">
+      <Publish>True</Publish>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env\">
