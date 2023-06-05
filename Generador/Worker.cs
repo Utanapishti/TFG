@@ -8,19 +8,19 @@ namespace Generador
     public class Worker : BackgroundService
     {
         private readonly ILogger<Worker> _logger;
-        Publisher _publisher;
+        RabbitMQConnection _publisher;
         DataGenerator _dataGenerator;
         TimeSpan _delay;
         string _name;
 
-        public Worker(ILogger<Worker> logger, Publisher publisher, IOptions<GeneradorOptions> options)
+        public Worker(ILogger<Worker> logger, RabbitMQConnection publisher, IOptions<GeneradorOptions> options)
         {
             _logger = logger;
             _publisher = publisher;
             _dataGenerator = new DataGenerator(options.Value.Values);
             _delay = options.Value.Interval;
             _name = options.Value.Name;
-            _publisher.CreatePublisher();
+            _publisher.Connect();
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)

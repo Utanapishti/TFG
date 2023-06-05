@@ -20,12 +20,12 @@ namespace Magatzem
 
         public override Task<RespostaPeticioValor> Valor(PeticioValor request, ServerCallContext context)
         {
+            i++;
             return Task.FromResult(new RespostaPeticioValor()
             {
                 Valor = i,
                 TimestampRebut = (uint)i
-            });
-            i++;
+            });            
         }
     }
 }

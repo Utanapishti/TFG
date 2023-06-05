@@ -1,5 +1,6 @@
 
 from email import message
+import queue
 from sqlite3 import Timestamp
 import pika
 import time
@@ -25,18 +26,33 @@ def callback(ch, method, properties, body):
     #Comprovem els parametres que falten
     parametres = {}
     for nomVariable in funcio.Parametres:
-        variable = variables[nomVariable]
+        valorVariable = valorsVariables[nomVariable]
         nomParametre = funcio.Parametres[nomVariable]
-        if variable.Timestamp < calculDada.timeStampActual:
+        if valorVariable is None or valorVariable.Timestamp < calculDada.timeStampActual:
             #Demanar valor
+            peticio = missatgesRPC_pb2.PeticioValor()
+            peticio.nomVariable=nomVariable
+            resultat = stubValorService.Valor(peticio);
             #Crear nova variable amb valor i timestamp per no afectar les que s'estan calculant
-            print("Peticio valor")
-        elif variable.Timestamp > calculDada.timeStampRebut:
+            valorVariable=ValorVariable(resultat.valor,resultat.timestampRebut)
+            ActualitzaValor(nomVariable,resultat.valor,resultat.timestampRebut)
+        elif valorVariable.Timestamp > calculDada.timeStampRebut:
             #Cancelar l'operacio, ja s'ha calculat aquesta variable en el futur        
-            print("Variable futura")
-        parametres[nomParametre]=variable.Valor
+            return
+        parametres[nomParametre]=valorVariable.Valor
     #Calcular
-    #Actualitzar valors variables de tots els parametres
+    resultatCalcul = getattr(funcionsCalculVariables,funcio)(**parametres)
+    #Actualitzar valor de la variable calculada
+    ActualitzaValor(calculDada.variableCalcular,resultatCalcul,calculDada.timeStampActual)
+    #Informar del resultat del calcul
+    payload = missatges_pb2.DadaCalculada()
+    channelRabbitMQ.basic_publish(queue=configRabbitMQ['Channel'],
+                                  body=payload.SerializeToString())
+
+    
+
+def ActualitzaValor(nomVariable, valor, timestamp):
+    valorsVariables[nomVariable]=ValorVariable(nomVariable,valor,timestamp)
 
 
     
@@ -47,21 +63,15 @@ class Funcio:
         self.Parametres = {}
 
 class ValorVariable:
-    def __init__(self):
-        self.Valor = 0.0        
-        self.Timestamp = 0
+    def __init__(self,valor,timestamp):
+        self.Valor = valor
+        self.Timestamp = timestamp
 
     def ActualitzaValor(valor, timestamp):
         if (timestamp<Timestamp):
             Valor=valor
             Timestamp=timestamp
         
-
-channel = grpc.insecure_channel('127.0.0.1:5098')
-stub = missatgesRPC_pb2_grpc.ValorServiceStub(channel)
-peticio = missatgesRPC_pb2.PeticioValor()
-peticio.nomVariable="TEST"
-resultat = stub.Valor(peticio);
 
 try:        
     configFile = open("appsettings.json")
@@ -74,6 +84,10 @@ except:
 		"Host": "localhost",
 		"Port": 5672,
 		"Channel": "calculDades"
+	},
+    "GRPCValors": {
+		"Host": "localhost",
+		"Port":  5098
 	}
 }""")
     configFunctions = json.loads("""
@@ -92,7 +106,7 @@ except:
       },
       {
         "ReturnValue": "PIE1_PRE",
-        "Function": "PressioPiezometre4500",
+            "Function": "PressioPiezometre4500",
         "Parameters": [
           {
             "Name": "periode",
@@ -113,7 +127,8 @@ except:
 }
     """)
 configRabbitMQ=config['RabbitMQCalculDades']
-variables = {}        
+configGRPC=config['GRPCValors']
+valorsVariables = {}        
 funcions = {}
 for configFunction in configFunctions['FunctionsDefinition']['Functions']:
     function = Funcio()    
@@ -128,14 +143,16 @@ parametres= {'resistencia':0}
 print(getattr(funcionsCalculVariables,funcio)(**parametres))
 while True:
     try:        
+        channelGRPC = grpc.insecure_channel(configGRPC['Host']+":"+configGRPC['Port'])
+        stubValorService = missatgesRPC_pb2_grpc.ValorServiceStub(channelGRPC)
         connection = pika.BlockingConnection(pika.ConnectionParameters(host=configRabbitMQ['Host'],port=configRabbitMQ['Port']))
-        channel = connection.channel()
+        channelRabbitMQ = connection.channel()
         print("Connected")
-        channel.queue_declare(configRabbitMQ['Channel'],durable=True)        
-        channel.basic_consume(queue=configRabbitMQ['Channel'],                                            
+        channelRabbitMQ.queue_declare(configRabbitMQ['Channel'],durable=True)        
+        channelRabbitMQ.basic_consume(queue=configRabbitMQ['Channel'],                                            
                       auto_ack=True,
                       on_message_callback=callback)        
-        channel.start_consuming()
+        channelRabbitMQ.start_consuming()
     except Exception as e:
         print(str(datetime.now()) + ": Connection failed "+str(e))
         time.sleep(30)
