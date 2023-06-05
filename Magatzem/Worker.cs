@@ -1,5 +1,6 @@
 using GestorCalculs;
 using Google.Protobuf;
+using GRPC;
 using Messaging;
 using Protocol;
 
@@ -11,17 +12,19 @@ namespace Magatzem
         private readonly Publisher _publisher;
         private readonly Consumer _subscriber;
         private GestorFuncions _gestorFuncions;
+        private RPCServer _rpcServer;
 
         public Worker(ILogger<Worker> logger,Publisher publisher,Consumer subscriber,GestorFuncions gestorFuncions)
         {
+            _rpcServer = new RPCServer(new ValorServiceImpl(logger));            
             _gestorFuncions = gestorFuncions;
             _gestorFuncions.PeticioCalcul = PeticioCalcul;
             _logger = logger;            
             _publisher = publisher;
             _subscriber = subscriber;
-            _publisher.CreatePublisher();
+            /*_publisher.CreatePublisher();
             _subscriber.Subscribe();
-            _subscriber.Received += _subscriber_Received;            
+            _subscriber.Received += _subscriber_Received;            */
         }
 
         private void PeticioCalcul(string variableCalcular, string variableRebuda, Dada dadaRebuda, uint tsActual)

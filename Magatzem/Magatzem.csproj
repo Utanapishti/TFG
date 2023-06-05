@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Worker">
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GestorCalculs\GestorCalculs.csproj" />
-    <ProjectReference Include="..\GRPCServer\GRPCServer.csproj" />
+    <ProjectReference Include="..\GRPC\GRPC.csproj" />
     <ProjectReference Include="..\Messaging\RabbitMQMessaging.csproj" />
     <ProjectReference Include="..\Protocol\Protocol.csproj" />
   </ItemGroup>
