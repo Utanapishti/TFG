@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x12missatgesRPC.proto\x12\x0bTFGProtocol\"#\n\x0cPeticioValor\x12\x13\n\x0bnomVariable\x18\x01 \x01(\t\"=\n\x14RespostaPeticioValor\x12\r\n\x05valor\x18\x01 \x01(\x01\x12\x16\n\x0etimestampRebut\x18\x02 \x01(\r2U\n\x0cValorService\x12\x45\n\x05Valor\x12\x19.TFGProtocol.PeticioValor\x1a!.TFGProtocol.RespostaPeticioValorB\x14\xaa\x02\x11TFG.Protobuf.GRPCb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x12missatgesRPC.proto\x12\x0bTFGProtocol\"#\n\x0cPeticioValor\x12\x13\n\x0bnomVariable\x18\x01 \x01(\t\"=\n\x14RespostaPeticioValor\x12\r\n\x05valor\x18\x01 \x01(\x01\x12\x16\n\x0etimestampRebut\x18\x02 \x01(\r2W\n\x0cValorService\x12G\n\x05Valor\x12\x19.TFGProtocol.PeticioValor\x1a!.TFGProtocol.RespostaPeticioValor\"\x00\x42\x14\xaa\x02\x11TFG.Protobuf.GRPCb\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'missatgesRPC_pb2', globals())
@@ -26,5 +26,5 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _RESPOSTAPETICIOVALOR._serialized_start=72
   _RESPOSTAPETICIOVALOR._serialized_end=133
   _VALORSERVICE._serialized_start=135
-  _VALORSERVICE._serialized_end=220
+  _VALORSERVICE._serialized_end=222
 # @@protoc_insertion_point(module_scope)

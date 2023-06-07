@@ -17,7 +17,7 @@ namespace GRPC
             Server server = new Server()
             {
                 Services = { ValorService.BindService(valorServiceImpl) },
-                Ports = { new ServerPort("localhost", 5098, ServerCredentials.Insecure) }
+                Ports = { new ServerPort("0.0.0.0", 5098, ServerCredentials.Insecure) }
             };            
             server.Start();
         }

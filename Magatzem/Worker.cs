@@ -22,10 +22,11 @@ namespace Magatzem
             _gestorFuncions.PeticioCalcul = PeticioCalcul;
             _logger = logger;
             _conTractament = new RabbitMQConnection(_logger, tractamentOptions);
+            _conTractament.Connect();
             _conGenerador = new RabbitMQConnection(_logger, generadorOptions);
-            /*_publisher.CreatePublisher();
-            _subscriber.Subscribe();
-            _subscriber.Received += _subscriber_Received;            */
+            _conGenerador.Connect();
+            _conGenerador.Subscribe();
+            _conGenerador.Received += _subscriber_Received;            
         }
 
         private void PeticioCalcul(string variableCalcular, string variableRebuda, Dada dadaRebuda, uint tsActual)

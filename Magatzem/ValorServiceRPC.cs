@@ -20,6 +20,7 @@ namespace Magatzem
 
         public override Task<RespostaPeticioValor> Valor(PeticioValor request, ServerCallContext context)
         {
+            _logger.Log(LogLevel.Information, $"Received petition for value {request.NomVariable}");
             i++;
             return Task.FromResult(new RespostaPeticioValor()
             {

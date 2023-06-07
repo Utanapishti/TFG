@@ -1,4 +1,4 @@
-
+import time
 from email import message
 import queue
 from sqlite3 import Timestamp
@@ -32,6 +32,8 @@ def callback(ch, method, properties, body):
             #Demanar valor
             peticio = missatgesRPC_pb2.PeticioValor()
             peticio.nomVariable=nomVariable
+            channelGRPC = grpc.insecure_channel(configGRPC['Host']+":"+str(configGRPC['Port']),options=(('grpc.enable_http_proxy', 0),))
+            stubValorService = missatgesRPC_pb2_grpc.ValorServiceStub(channelGRPC)
             resultat = stubValorService.Valor(peticio);
             #Crear nova variable amb valor i timestamp per no afectar les que s'estan calculant
             valorVariable=ValorVariable(resultat.valor,resultat.timestampRebut)
@@ -137,21 +139,39 @@ for configFunction in configFunctions['FunctionsDefinition']['Functions']:
     for configParameter in configFunction['Parameters']: 
         function.Parametres[configParameter['AssociatedValue']] = configParameter['Name']
     funcions[function.ReturnValue] = function
+    
 
-funcio = 'TemperaturaPiezometre4500'
-parametres= {'resistencia':0}
-print(getattr(funcionsCalculVariables,funcio)(**parametres))
 while True:
     try:        
-        channelGRPC = grpc.insecure_channel(configGRPC['Host']+":"+configGRPC['Port'])
+        channelGRPC = grpc.insecure_channel(configGRPC['Host']+":"+str(configGRPC['Port']),options=(('grpc.enable_http_proxy', 0),))
         stubValorService = missatgesRPC_pb2_grpc.ValorServiceStub(channelGRPC)
+        peticio = missatgesRPC_pb2.PeticioValor()
+        peticio.nomVariable='TEST'
+        resultat = stubValorService.Valor(peticio);
+
+        peticio = missatgesRPC_pb2.PeticioValor()
+        peticio.nomVariable='TEST1'
+        resultat = stubValorService.Valor(peticio);
+
         connection = pika.BlockingConnection(pika.ConnectionParameters(host=configRabbitMQ['Host'],port=configRabbitMQ['Port']))
         channelRabbitMQ = connection.channel()
         print("Connected")
         channelRabbitMQ.queue_declare(configRabbitMQ['Channel'],durable=True)        
         channelRabbitMQ.basic_consume(queue=configRabbitMQ['Channel'],                                            
                       auto_ack=True,
-                      on_message_callback=callback)        
+                      on_message_callback=callback)
+        
+        peticio = missatgesRPC_pb2.PeticioValor()
+        peticio.nomVariable='TEST2'
+        resultat = stubValorService.Valor(peticio);
+
+        time.sleep(10)
+        peticio = missatgesRPC_pb2.PeticioValor()
+        peticio.nomVariable='TEST3'
+        resultat = stubValorService.Valor(peticio);
+
+
+        print("Waiting for messages...")
         channelRabbitMQ.start_consuming()
     except Exception as e:
         print(str(datetime.now()) + ": Connection failed "+str(e))

@@ -43,13 +43,10 @@ services:
     build:
       context: .
       dockerfile: Magatzem/Dockerfile
+    ports:
+        - 5098:5098
     depends_on:
       - 'rabbitmq'
-    ports:
-        - 80:80
-        - 443:443
-        - 5098:5098
-        - 7120:7120
     networks:
       - sensor_net
 

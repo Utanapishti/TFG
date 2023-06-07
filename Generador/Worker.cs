@@ -13,10 +13,10 @@ namespace Generador
         TimeSpan _delay;
         string _name;
 
-        public Worker(ILogger<Worker> logger, RabbitMQConnection publisher, IOptions<GeneradorOptions> options)
+        public Worker(ILogger<Worker> logger, IOptions<ConnectionOptions> connectionOptions, IOptions<GeneradorOptions> options)
         {
             _logger = logger;
-            _publisher = publisher;
+            _publisher = new RabbitMQConnection(logger, connectionOptions);            
             _dataGenerator = new DataGenerator(options.Value.Values);
             _delay = options.Value.Interval;
             _name = options.Value.Name;
