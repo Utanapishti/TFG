@@ -42,22 +42,33 @@ namespace Messaging
             _publicationAddress = new PublicationAddress(ExchangeType.Direct, string.Empty, _queueName);
         }
 
-        public bool Connect()
+        public void ConnectAndSubscribe(CancellationToken cancelToken)
         {
-            _model = ConnectModel();
+            var policy = RetryPolicy.HandleResult<bool>(false).WaitAndRetryForever<bool>(i => retryTime);
+            policy.Execute(() => Connect(cancelToken));
+            Subscribe();
+        }
+
+        public bool Connect(CancellationToken cancelToken)
+        {
+            _logger.LogInformation("Connecting to RabbitMQ queue");
+
+            _model = ConnectModel(cancelToken);
             if (_model != null)
             {
                 _model.QueueDeclare(queue: _queueName, durable: true, exclusive: false, autoDelete: false);
                 _properties = _model.CreateBasicProperties();
                 _properties.DeliveryMode = 2;
             }
+            else _logger.LogInformation("Connection failed");
 
             return _model != null;
         }
 
         public void Subscribe()
         {
-            
+            _logger.LogInformation("Connecting to RabbitMQ queue");
+
             if (_model != null)
             {
                 var queue = _model.QueueDeclare(_queueName, true, false, false, null);
@@ -66,6 +77,7 @@ namespace Messaging
 
                 _model.BasicConsume(queue.QueueName, true, consumer);
             }
+            else _logger.LogInformation("Connection failed");
         }
         public void Publish(byte[] data)
         {
@@ -81,25 +93,24 @@ namespace Messaging
             Received?.Invoke(this, e);
         }
 
-        protected IModel? ConnectModel()
+        protected IModel? ConnectModel(CancellationToken cancelToken)
         {
             if ((_connection == null)
                 || (!_connection.IsOpen))
-            {
-                _logger.LogInformation("Connecting to RabbitMQ queue");
-
+            {                
                 lock (_lockConnection)
                 {
                     _policy = RetryPolicy.Handle<Exception>()
-                        .WaitAndRetryForever((i) => retryTime, (Exception, time) => { _model = ConnectModel(); });
+                        .WaitAndRetryForever((i) => retryTime);
 
-                    _policy.Execute(() =>
+                    _policy.Execute((CancellationToken cancelToken) =>
                     {
                         _connection = _connectionFactory.CreateConnection();                        
-                    });
+                    }, cancelToken);
 
                     if ((_connection != null) && (_connection.IsOpen))
                     {
+                        _logger.LogInformation("Connected to RabbitMQ queue");
                         _connection.ConnectionShutdown += _connection_ConnectionShutdown;                        
                     }
                 }
@@ -111,7 +122,7 @@ namespace Messaging
         private void _connection_ConnectionShutdown(object? sender, ShutdownEventArgs e)
         {
             _logger.LogInformation($"Connection shutdown {e.ReplyText}");
-            Connect();
+            Connect(default);
         }
 
         public void TestSend() {

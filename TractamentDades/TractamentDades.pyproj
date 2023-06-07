@@ -36,7 +36,7 @@
     <Folder Include="tractament\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="buildProtocol.sh" />
+    <Content Include="buildProtocol.bat" />
     <Content Include="protoc.exe" />
     <Content Include="requirements.txt" />
     <Content Include="tractament\functionsDefinition.json">

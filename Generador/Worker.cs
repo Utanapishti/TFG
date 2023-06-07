@@ -20,11 +20,12 @@ namespace Generador
             _dataGenerator = new DataGenerator(options.Value.Values);
             _delay = options.Value.Interval;
             _name = options.Value.Name;
-            _publisher.Connect();
+            
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            _publisher.Connect(stoppingToken);
             while (!stoppingToken.IsCancellationRequested)
             {                
                 var valor = _dataGenerator.GetValue();

@@ -12,8 +12,8 @@ namespace Magatzem
         private readonly ILogger _logger;
         private readonly RabbitMQConnection _conTractament;
         private readonly RabbitMQConnection _conGenerador;
-        private GestorFuncions _gestorFuncions;
-        private RPCServer _rpcServer;
+        private readonly GestorFuncions _gestorFuncions;
+        private readonly RPCServer _rpcServer;
 
         public Worker(ILogger<Worker> logger, IOptions<TractamentConnectionOptions> tractamentOptions, IOptions<GeneradorConnectionOptions> generadorOptions ,GestorFuncions gestorFuncions)
         {
@@ -22,11 +22,8 @@ namespace Magatzem
             _gestorFuncions.PeticioCalcul = PeticioCalcul;
             _logger = logger;
             _conTractament = new RabbitMQConnection(_logger, tractamentOptions);
-            _conTractament.Connect();
             _conGenerador = new RabbitMQConnection(_logger, generadorOptions);
-            _conGenerador.Connect();
-            _conGenerador.Subscribe();
-            _conGenerador.Received += _subscriber_Received;            
+            _conGenerador.Received += _subscriber_Received;
         }
 
         private void PeticioCalcul(string variableCalcular, string variableRebuda, Dada dadaRebuda, uint tsActual)
@@ -53,6 +50,10 @@ namespace Magatzem
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            
+            _conTractament.Connect(stoppingToken);            
+            _conGenerador.ConnectAndSubscribe(stoppingToken);            
+
             while (!stoppingToken.IsCancellationRequested)
             {                
                 await Task.Delay(1000, stoppingToken);

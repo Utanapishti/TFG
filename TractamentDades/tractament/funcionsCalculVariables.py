@@ -7,7 +7,7 @@ def PressioPiezometre4500(periode,temperatura, pressioAtmosferica):
     K = 0.03552
     T0 = 22.6
     S0 = 990.1
-    pressio = G*(periode-P0)+K(temperatura-T0)+(pressioAtmosferica-S0)
+    pressio = G*(periode-P0)+K*(temperatura-T0)+(pressioAtmosferica-S0)
     return pressio
 
 def PressioPercentual(pressio,nivell):
