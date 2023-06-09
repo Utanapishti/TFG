@@ -15,10 +15,10 @@ namespace Magatzem
         private RPCServer _rpcServer;
 
         public Worker(ILogger<Worker> logger,Publisher publisher,Consumer subscriber,GestorFuncions gestorFuncions)
-        {
-            _rpcServer = new RPCServer(new ValorServiceImpl(logger));            
+        {            
             _gestorFuncions = gestorFuncions;
             _gestorFuncions.PeticioCalcul = PeticioCalcul;
+            _rpcServer = new RPCServer(new ValorServiceImpl(logger, gestorFuncions));
             _logger = logger;            
             _publisher = publisher;
             _subscriber = subscriber;

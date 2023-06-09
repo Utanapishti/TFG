@@ -12,14 +12,25 @@ namespace GRPC
 {
     public class RPCServer
     {
+        private Server _server;
+
         public RPCServer(ValorService.ValorServiceBase valorServiceImpl)
         {
-            Server server = new Server()
+            _server = new Server()
             {
                 Services = { ValorService.BindService(valorServiceImpl) },
                 Ports = { new ServerPort("localhost", 5098, ServerCredentials.Insecure) }
-            };            
-            server.Start();
+            };                        
+        }
+
+        public void Start()
+        {
+            _server.Start();
+        }
+
+        public void Stop()
+        {
+            _server.KillAsync();
         }
     }
 }
