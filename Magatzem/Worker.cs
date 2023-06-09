@@ -5,6 +5,7 @@ using Messaging;
 using Microsoft.Extensions.Options;
 using Protocol;
 
+
 namespace Magatzem
 {
     public class Worker : BackgroundService
@@ -22,19 +23,28 @@ namespace Magatzem
             _gestorFuncions.PeticioCalcul = PeticioCalcul;
             _logger = logger;
             _conTractament = new RabbitMQConnection(_logger, tractamentOptions);
+            _conTractament.Received += _conTractament_Received;
             _conGenerador = new RabbitMQConnection(_logger, generadorOptions);
             _conGenerador.Received += _subscriber_Received;
         }
 
-        private void PeticioCalcul(string variableCalcular, string variableRebuda, Dada dadaRebuda, uint tsActual)
+        private void _conTractament_Received(object? sender, RabbitMQ.Client.Events.BasicDeliverEventArgs e)
+        {
+            //Dada rebuda
+            var dadaCalculada =  ProtocolDadaCalculada.Parse(e.Body.ToArray());
+            _gestorFuncions.RebutDadaCalculada(dadaCalculada.NomVariable, dadaCalculada.Valor,dadaCalculada.Timestamp);
+            _logger.LogInformation("Received data from {name}: {valor}", dadaCalculada.NomVariable, dadaCalculada.Valor);
+        }
+
+        private void PeticioCalcul(string variableCalcular, string variableRebuda, Dada dadaRebuda, uint tsAltresValors)
         {
             var calculDada= new TFG.Protobuf.CalculDada()
             {
                 VariableCalcular = variableCalcular,
                 VariableRebuda = variableRebuda,
                 ValorRebut=dadaRebuda.Valor,
-                TimeStampRebut=dadaRebuda.Timestamp,
-                TimeStampActual=tsActual
+                TimestampRebut=dadaRebuda.Timestamp,
+                TimestampActual=tsAltresValors
             };
 
             _conTractament.Publish(MessageExtensions.ToByteArray(calculDada));

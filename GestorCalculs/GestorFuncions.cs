@@ -13,7 +13,7 @@ namespace GestorCalculs
         private GestorVariables _variables = new GestorVariables();
         private ILogger _logger;
 
-        public delegate void DelPeticioCalcul(string variableCalcular, string variableRebuda, Dada dadaRebuda, uint tsActual);
+        public delegate void DelPeticioCalcul(string variableCalcular, string variableRebuda, Dada dadaRebuda, uint tsAltresValors);
         public DelPeticioCalcul PeticioCalcul;
 
         public GestorFuncions(ILogger<GestorFuncions> logger, IOptions<GestorFuncionsOptions> options)
@@ -65,11 +65,21 @@ namespace GestorCalculs
                 //Overflow
             }
 
-            var dada = _variables.AfegirDada(nomVariable, ts, valor);            
+            var dada = _variables.AfegirDada(nomVariable, ts, valor);
+
+            if (dada!=null)
+            {
+                CalculaRelacionats(nomVariable, dada);
+            }
+        }
+
+        public void RebutDadaCalculada(string nomVariable, double valor, uint timestamp)
+        {            
+            var dada = _variables.AfegirDada(nomVariable, timestamp, valor);
 
             CalculaRelacionats(nomVariable, dada);
         }
-        
+
         public Dada? DemanaUltimaDada(string nomVariable)
         {
             return _variables.GetUltimaDada(nomVariable);

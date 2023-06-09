@@ -27,6 +27,23 @@ namespace Protocol
         }
     }
 
+    public static class ProtocolDadaCalculada
+    {
+        public static byte[] GeneratePayload(DadaCalculada dada)
+        {
+            TFG.Protobuf.DadaCalculada message = new();
+            message.Valor= dada.Valor;
+            message.NomVariable=dada.NomVariable;
+            message.Timestamp = dada.Timestamp; 
+            return MessageExtensions.ToByteArray(message);
+        }
+
+        public static DadaCalculada Parse(byte[] payload)
+        {
+            var message=TFG.Protobuf.DadaCalculada.Parser.ParseFrom(payload);
+            return new DadaCalculada(message.NomVariable,message.Valor,message.Timestamp);
+        }
+    }
 
     /*public static class ProtocolDadaTractada
     {

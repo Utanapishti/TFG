@@ -28,18 +28,20 @@ namespace TFG.Protobuf {
             "dWYvdGltZXN0YW1wLnByb3RvIjAKDERhZGFHZW5lcmFkYRINCgV2YWxvchgB",
             "IAEoARIRCglub21TZW5zb3IYAiABKAkigwEKCkNhbGN1bERhZGESGAoQdmFy",
             "aWFibGVDYWxjdWxhchgBIAEoCRIWCg52YXJpYWJsZVJlYnVkYRgCIAEoCRIS",
-            "Cgp2YWxvclJlYnV0GAMgASgBEhYKDnRpbWVTdGFtcFJlYnV0GAQgASgNEhcK",
-            "D3RpbWVTdGFtcEFjdHVhbBgFIAEoDSIVCgREYWRhEg0KBXZhbG9yGAEgASgB",
-            "ImoKDURhdGVzQ29uc3VsdGESLQoJZGF0YUluaWNpGAEgASgLMhouZ29vZ2xl",
-            "LnByb3RvYnVmLlRpbWVzdGFtcBIqCgZkYXRhRmkYAiABKAsyGi5nb29nbGUu",
-            "cHJvdG9idWYuVGltZXN0YW1wIjEKDVJlc3Bvc3RhRGFkZXMSIAoFRGFkZXMY",
-            "ASADKAsyES5URkdQcm90b2NvbC5EYWRhQg+qAgxURkcuUHJvdG9idWZiBnBy",
-            "b3RvMw=="));
+            "Cgp2YWxvclJlYnV0GAMgASgBEhYKDnRpbWVzdGFtcFJlYnV0GAQgASgNEhcK",
+            "D3RpbWVzdGFtcEFjdHVhbBgFIAEoDSJGCg1EYWRhQ2FsY3VsYWRhEhMKC25v",
+            "bVZhcmlhYmxlGAEgASgJEg0KBXZhbG9yGAIgASgBEhEKCXRpbWVzdGFtcBgD",
+            "IAEoDSIVCgREYWRhEg0KBXZhbG9yGAEgASgBImoKDURhdGVzQ29uc3VsdGES",
+            "LQoJZGF0YUluaWNpGAEgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFt",
+            "cBIqCgZkYXRhRmkYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1w",
+            "IjEKDVJlc3Bvc3RhRGFkZXMSIAoFRGFkZXMYASADKAsyES5URkdQcm90b2Nv",
+            "bC5EYWRhQg+qAgxURkcuUHJvdG9idWZiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::TFG.Protobuf.DadaGenerada), global::TFG.Protobuf.DadaGenerada.Parser, new[]{ "Valor", "NomSensor" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::TFG.Protobuf.CalculDada), global::TFG.Protobuf.CalculDada.Parser, new[]{ "VariableCalcular", "VariableRebuda", "ValorRebut", "TimeStampRebut", "TimeStampActual" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::TFG.Protobuf.CalculDada), global::TFG.Protobuf.CalculDada.Parser, new[]{ "VariableCalcular", "VariableRebuda", "ValorRebut", "TimestampRebut", "TimestampActual" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::TFG.Protobuf.DadaCalculada), global::TFG.Protobuf.DadaCalculada.Parser, new[]{ "NomVariable", "Valor", "Timestamp" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::TFG.Protobuf.Dada), global::TFG.Protobuf.Dada.Parser, new[]{ "Valor" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::TFG.Protobuf.DatesConsulta), global::TFG.Protobuf.DatesConsulta.Parser, new[]{ "DataInici", "DataFi" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::TFG.Protobuf.RespostaDades), global::TFG.Protobuf.RespostaDades.Parser, new[]{ "Dades" }, null, null, null, null)
@@ -312,8 +314,8 @@ namespace TFG.Protobuf {
       variableCalcular_ = other.variableCalcular_;
       variableRebuda_ = other.variableRebuda_;
       valorRebut_ = other.valorRebut_;
-      timeStampRebut_ = other.timeStampRebut_;
-      timeStampActual_ = other.timeStampActual_;
+      timestampRebut_ = other.timestampRebut_;
+      timestampActual_ = other.timestampActual_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -359,27 +361,27 @@ namespace TFG.Protobuf {
       }
     }
 
-    /// <summary>Field number for the "timeStampRebut" field.</summary>
-    public const int TimeStampRebutFieldNumber = 4;
-    private uint timeStampRebut_;
+    /// <summary>Field number for the "timestampRebut" field.</summary>
+    public const int TimestampRebutFieldNumber = 4;
+    private uint timestampRebut_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint TimeStampRebut {
-      get { return timeStampRebut_; }
+    public uint TimestampRebut {
+      get { return timestampRebut_; }
       set {
-        timeStampRebut_ = value;
+        timestampRebut_ = value;
       }
     }
 
-    /// <summary>Field number for the "timeStampActual" field.</summary>
-    public const int TimeStampActualFieldNumber = 5;
-    private uint timeStampActual_;
+    /// <summary>Field number for the "timestampActual" field.</summary>
+    public const int TimestampActualFieldNumber = 5;
+    private uint timestampActual_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint TimeStampActual {
-      get { return timeStampActual_; }
+    public uint TimestampActual {
+      get { return timestampActual_; }
       set {
-        timeStampActual_ = value;
+        timestampActual_ = value;
       }
     }
 
@@ -401,8 +403,8 @@ namespace TFG.Protobuf {
       if (VariableCalcular != other.VariableCalcular) return false;
       if (VariableRebuda != other.VariableRebuda) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(ValorRebut, other.ValorRebut)) return false;
-      if (TimeStampRebut != other.TimeStampRebut) return false;
-      if (TimeStampActual != other.TimeStampActual) return false;
+      if (TimestampRebut != other.TimestampRebut) return false;
+      if (TimestampActual != other.TimestampActual) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -413,8 +415,8 @@ namespace TFG.Protobuf {
       if (VariableCalcular.Length != 0) hash ^= VariableCalcular.GetHashCode();
       if (VariableRebuda.Length != 0) hash ^= VariableRebuda.GetHashCode();
       if (ValorRebut != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(ValorRebut);
-      if (TimeStampRebut != 0) hash ^= TimeStampRebut.GetHashCode();
-      if (TimeStampActual != 0) hash ^= TimeStampActual.GetHashCode();
+      if (TimestampRebut != 0) hash ^= TimestampRebut.GetHashCode();
+      if (TimestampActual != 0) hash ^= TimestampActual.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -445,13 +447,13 @@ namespace TFG.Protobuf {
         output.WriteRawTag(25);
         output.WriteDouble(ValorRebut);
       }
-      if (TimeStampRebut != 0) {
+      if (TimestampRebut != 0) {
         output.WriteRawTag(32);
-        output.WriteUInt32(TimeStampRebut);
+        output.WriteUInt32(TimestampRebut);
       }
-      if (TimeStampActual != 0) {
+      if (TimestampActual != 0) {
         output.WriteRawTag(40);
-        output.WriteUInt32(TimeStampActual);
+        output.WriteUInt32(TimestampActual);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -475,13 +477,13 @@ namespace TFG.Protobuf {
         output.WriteRawTag(25);
         output.WriteDouble(ValorRebut);
       }
-      if (TimeStampRebut != 0) {
+      if (TimestampRebut != 0) {
         output.WriteRawTag(32);
-        output.WriteUInt32(TimeStampRebut);
+        output.WriteUInt32(TimestampRebut);
       }
-      if (TimeStampActual != 0) {
+      if (TimestampActual != 0) {
         output.WriteRawTag(40);
-        output.WriteUInt32(TimeStampActual);
+        output.WriteUInt32(TimestampActual);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -502,11 +504,11 @@ namespace TFG.Protobuf {
       if (ValorRebut != 0D) {
         size += 1 + 8;
       }
-      if (TimeStampRebut != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(TimeStampRebut);
+      if (TimestampRebut != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(TimestampRebut);
       }
-      if (TimeStampActual != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(TimeStampActual);
+      if (TimestampActual != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(TimestampActual);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -529,11 +531,11 @@ namespace TFG.Protobuf {
       if (other.ValorRebut != 0D) {
         ValorRebut = other.ValorRebut;
       }
-      if (other.TimeStampRebut != 0) {
-        TimeStampRebut = other.TimeStampRebut;
+      if (other.TimestampRebut != 0) {
+        TimestampRebut = other.TimestampRebut;
       }
-      if (other.TimeStampActual != 0) {
-        TimeStampActual = other.TimeStampActual;
+      if (other.TimestampActual != 0) {
+        TimestampActual = other.TimestampActual;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -563,11 +565,11 @@ namespace TFG.Protobuf {
             break;
           }
           case 32: {
-            TimeStampRebut = input.ReadUInt32();
+            TimestampRebut = input.ReadUInt32();
             break;
           }
           case 40: {
-            TimeStampActual = input.ReadUInt32();
+            TimestampActual = input.ReadUInt32();
             break;
           }
         }
@@ -598,11 +600,274 @@ namespace TFG.Protobuf {
             break;
           }
           case 32: {
-            TimeStampRebut = input.ReadUInt32();
+            TimestampRebut = input.ReadUInt32();
             break;
           }
           case 40: {
-            TimeStampActual = input.ReadUInt32();
+            TimestampActual = input.ReadUInt32();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class DadaCalculada : pb::IMessage<DadaCalculada>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<DadaCalculada> _parser = new pb::MessageParser<DadaCalculada>(() => new DadaCalculada());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<DadaCalculada> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::TFG.Protobuf.MissatgesReflection.Descriptor.MessageTypes[2]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public DadaCalculada() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public DadaCalculada(DadaCalculada other) : this() {
+      nomVariable_ = other.nomVariable_;
+      valor_ = other.valor_;
+      timestamp_ = other.timestamp_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public DadaCalculada Clone() {
+      return new DadaCalculada(this);
+    }
+
+    /// <summary>Field number for the "nomVariable" field.</summary>
+    public const int NomVariableFieldNumber = 1;
+    private string nomVariable_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string NomVariable {
+      get { return nomVariable_; }
+      set {
+        nomVariable_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "valor" field.</summary>
+    public const int ValorFieldNumber = 2;
+    private double valor_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public double Valor {
+      get { return valor_; }
+      set {
+        valor_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "timestamp" field.</summary>
+    public const int TimestampFieldNumber = 3;
+    private uint timestamp_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint Timestamp {
+      get { return timestamp_; }
+      set {
+        timestamp_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as DadaCalculada);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(DadaCalculada other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (NomVariable != other.NomVariable) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(Valor, other.Valor)) return false;
+      if (Timestamp != other.Timestamp) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (NomVariable.Length != 0) hash ^= NomVariable.GetHashCode();
+      if (Valor != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(Valor);
+      if (Timestamp != 0) hash ^= Timestamp.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (NomVariable.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(NomVariable);
+      }
+      if (Valor != 0D) {
+        output.WriteRawTag(17);
+        output.WriteDouble(Valor);
+      }
+      if (Timestamp != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(Timestamp);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (NomVariable.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(NomVariable);
+      }
+      if (Valor != 0D) {
+        output.WriteRawTag(17);
+        output.WriteDouble(Valor);
+      }
+      if (Timestamp != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(Timestamp);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (NomVariable.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(NomVariable);
+      }
+      if (Valor != 0D) {
+        size += 1 + 8;
+      }
+      if (Timestamp != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Timestamp);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(DadaCalculada other) {
+      if (other == null) {
+        return;
+      }
+      if (other.NomVariable.Length != 0) {
+        NomVariable = other.NomVariable;
+      }
+      if (other.Valor != 0D) {
+        Valor = other.Valor;
+      }
+      if (other.Timestamp != 0) {
+        Timestamp = other.Timestamp;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            NomVariable = input.ReadString();
+            break;
+          }
+          case 17: {
+            Valor = input.ReadDouble();
+            break;
+          }
+          case 24: {
+            Timestamp = input.ReadUInt32();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            NomVariable = input.ReadString();
+            break;
+          }
+          case 17: {
+            Valor = input.ReadDouble();
+            break;
+          }
+          case 24: {
+            Timestamp = input.ReadUInt32();
             break;
           }
         }
@@ -626,7 +891,7 @@ namespace TFG.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::TFG.Protobuf.MissatgesReflection.Descriptor.MessageTypes[2]; }
+      get { return global::TFG.Protobuf.MissatgesReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -815,7 +1080,7 @@ namespace TFG.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::TFG.Protobuf.MissatgesReflection.Descriptor.MessageTypes[3]; }
+      get { return global::TFG.Protobuf.MissatgesReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1059,7 +1324,7 @@ namespace TFG.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::TFG.Protobuf.MissatgesReflection.Descriptor.MessageTypes[4]; }
+      get { return global::TFG.Protobuf.MissatgesReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
