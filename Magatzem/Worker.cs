@@ -2,29 +2,31 @@ using GestorCalculs;
 using Google.Protobuf;
 using GRPC;
 using Messaging;
+using Microsoft.Extensions.Options;
 using Protocol;
 
 namespace Magatzem
 {
     public class Worker : BackgroundService
     {
-        private readonly ILogger<Worker> _logger;
-        private readonly Publisher _publisher;
-        private readonly Consumer _subscriber;
+        private readonly ILogger _logger;
+        private readonly RabbitMQConnection _conTractament;
+        private readonly RabbitMQConnection _conGenerador;
         private GestorFuncions _gestorFuncions;
         private RPCServer _rpcServer;
 
-        public Worker(ILogger<Worker> logger,Publisher publisher,Consumer subscriber,GestorFuncions gestorFuncions)
-        {            
+        public Worker(ILogger<Worker> logger, IOptions<TractamentConnectionOptions> tractamentOptions, IOptions<GeneradorConnectionOptions> generadorOptions ,GestorFuncions gestorFuncions)
+        {
+            _rpcServer = new RPCServer(new ValorServiceImpl(logger));            
             _gestorFuncions = gestorFuncions;
             _gestorFuncions.PeticioCalcul = PeticioCalcul;
-            _rpcServer = new RPCServer(new ValorServiceImpl(logger, gestorFuncions));
-            _logger = logger;            
-            _publisher = publisher;
-            _subscriber = subscriber;
-            /*_publisher.CreatePublisher();
-            _subscriber.Subscribe();
-            _subscriber.Received += _subscriber_Received;            */
+            _logger = logger;
+            _conTractament = new RabbitMQConnection(_logger, tractamentOptions);
+            _conTractament.Connect();
+            _conGenerador = new RabbitMQConnection(_logger, generadorOptions);
+            _conGenerador.Connect();
+            _conGenerador.Subscribe();
+            _conGenerador.Received += _subscriber_Received;            
         }
 
         private void PeticioCalcul(string variableCalcular, string variableRebuda, Dada dadaRebuda, uint tsActual)
@@ -38,7 +40,7 @@ namespace Magatzem
                 TimeStampActual=tsActual
             };
 
-            _publisher.Publish(MessageExtensions.ToByteArray(calculDada));
+            _conTractament.Publish(MessageExtensions.ToByteArray(calculDada));
         }
 
         private void _subscriber_Received(object? sender, RabbitMQ.Client.Events.BasicDeliverEventArgs e)

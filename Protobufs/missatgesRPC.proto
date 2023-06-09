@@ -16,5 +16,5 @@ message RespostaPeticioValor
 }
 
 service ValorService {
-  rpc Valor (PeticioValor) returns (RespostaPeticioValor);
+  rpc Valor (PeticioValor) returns (RespostaPeticioValor) {}
 }

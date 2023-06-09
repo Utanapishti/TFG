@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SensorReader
+namespace Messaging
 {
     public class ConnectionOptions
-    {        
-        public string Host { get; set; }
-        public int Port { get; set; }
+    {
+        public string Host { get; set; } = "localhost";
+        public int Port { get; set; } = 5672;
         public string Channel { get; set; } = "TEST";
     }
 }
