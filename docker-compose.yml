@@ -51,7 +51,7 @@ services:
       - sensor_net
 
   tractament:    
-    image: tractament    
+    image: ${DOCKER_REGISTRY-}tractament    
     depends_on:
       - 'rabbitmq'
     networks:

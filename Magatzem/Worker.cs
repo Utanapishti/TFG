@@ -4,6 +4,7 @@ using GRPC;
 using Messaging;
 using Microsoft.Extensions.Options;
 using Protocol;
+using TipusDades;
 
 
 namespace Magatzem
@@ -17,10 +18,11 @@ namespace Magatzem
         private readonly RPCServer _rpcServer;
 
         public Worker(ILogger<Worker> logger, IOptions<TractamentConnectionOptions> tractamentOptions, IOptions<GeneradorConnectionOptions> generadorOptions ,GestorFuncions gestorFuncions)
-        {
-            _rpcServer = new RPCServer(new ValorServiceImpl(logger));            
+        {            
             _gestorFuncions = gestorFuncions;
             _gestorFuncions.PeticioCalcul = PeticioCalcul;
+            _rpcServer = new RPCServer(new ValorServiceImpl(logger,gestorFuncions));
+            _rpcServer.Start();
             _logger = logger;
             _conTractament = new RabbitMQConnection(_logger, tractamentOptions);
             _conTractament.Received += _conTractament_Received;
@@ -36,7 +38,7 @@ namespace Magatzem
             _logger.LogInformation("Received data from {name}: {valor}", dadaCalculada.NomVariable, dadaCalculada.Valor);
         }
 
-        private void PeticioCalcul(string variableCalcular, string variableRebuda, Dada dadaRebuda, uint tsAltresValors)
+        private void PeticioCalcul(string variableCalcular, string variableRebuda, GestorCalculs.Dada dadaRebuda, uint tsAltresValors)
         {
             var calculDada= new TFG.Protobuf.CalculDada()
             {

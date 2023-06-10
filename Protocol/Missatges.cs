@@ -24,26 +24,24 @@ namespace TFG.Protobuf {
     static MissatgesReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cg9taXNzYXRnZXMucHJvdG8SC1RGR1Byb3RvY29sGh9nb29nbGUvcHJvdG9i",
-            "dWYvdGltZXN0YW1wLnByb3RvIjAKDERhZGFHZW5lcmFkYRINCgV2YWxvchgB",
-            "IAEoARIRCglub21TZW5zb3IYAiABKAkigwEKCkNhbGN1bERhZGESGAoQdmFy",
-            "aWFibGVDYWxjdWxhchgBIAEoCRIWCg52YXJpYWJsZVJlYnVkYRgCIAEoCRIS",
-            "Cgp2YWxvclJlYnV0GAMgASgBEhYKDnRpbWVzdGFtcFJlYnV0GAQgASgNEhcK",
-            "D3RpbWVzdGFtcEFjdHVhbBgFIAEoDSJGCg1EYWRhQ2FsY3VsYWRhEhMKC25v",
-            "bVZhcmlhYmxlGAEgASgJEg0KBXZhbG9yGAIgASgBEhEKCXRpbWVzdGFtcBgD",
-            "IAEoDSIVCgREYWRhEg0KBXZhbG9yGAEgASgBImoKDURhdGVzQ29uc3VsdGES",
-            "LQoJZGF0YUluaWNpGAEgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFt",
-            "cBIqCgZkYXRhRmkYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1w",
-            "IjEKDVJlc3Bvc3RhRGFkZXMSIAoFRGFkZXMYASADKAsyES5URkdQcm90b2Nv",
-            "bC5EYWRhQg+qAgxURkcuUHJvdG9idWZiBnByb3RvMw=="));
+            "Cg9taXNzYXRnZXMucHJvdG8SC1RGR1Byb3RvY29sIjAKDERhZGFHZW5lcmFk",
+            "YRINCgV2YWxvchgBIAEoARIRCglub21TZW5zb3IYAiABKAkigwEKCkNhbGN1",
+            "bERhZGESGAoQdmFyaWFibGVDYWxjdWxhchgBIAEoCRIWCg52YXJpYWJsZVJl",
+            "YnVkYRgCIAEoCRISCgp2YWxvclJlYnV0GAMgASgBEhYKDnRpbWVzdGFtcFJl",
+            "YnV0GAQgASgNEhcKD3RpbWVzdGFtcEFjdHVhbBgFIAEoDSJGCg1EYWRhQ2Fs",
+            "Y3VsYWRhEhMKC25vbVZhcmlhYmxlGAEgASgJEg0KBXZhbG9yGAIgASgBEhEK",
+            "CXRpbWVzdGFtcBgDIAEoDSIqCgREYWRhEhMKC25vbVZhcmlhYmxlGAEgASgJ",
+            "Eg0KBXZhbG9yGAIgASgBIiQKDUNvbnN1bHRhRGFkZXMSEwoLbm9tVmFyaWFi",
+            "bGUYASADKAkiMQoNUmVzcG9zdGFEYWRlcxIgCgVEYWRlcxgBIAMoCzIRLlRG",
+            "R1Byb3RvY29sLkRhZGFCD6oCDFRGRy5Qcm90b2J1ZmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
+          new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::TFG.Protobuf.DadaGenerada), global::TFG.Protobuf.DadaGenerada.Parser, new[]{ "Valor", "NomSensor" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::TFG.Protobuf.CalculDada), global::TFG.Protobuf.CalculDada.Parser, new[]{ "VariableCalcular", "VariableRebuda", "ValorRebut", "TimestampRebut", "TimestampActual" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::TFG.Protobuf.DadaCalculada), global::TFG.Protobuf.DadaCalculada.Parser, new[]{ "NomVariable", "Valor", "Timestamp" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::TFG.Protobuf.Dada), global::TFG.Protobuf.Dada.Parser, new[]{ "Valor" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::TFG.Protobuf.DatesConsulta), global::TFG.Protobuf.DatesConsulta.Parser, new[]{ "DataInici", "DataFi" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::TFG.Protobuf.Dada), global::TFG.Protobuf.Dada.Parser, new[]{ "NomVariable", "Valor" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::TFG.Protobuf.ConsultaDades), global::TFG.Protobuf.ConsultaDades.Parser, new[]{ "NomVariable" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::TFG.Protobuf.RespostaDades), global::TFG.Protobuf.RespostaDades.Parser, new[]{ "Dades" }, null, null, null, null)
           }));
     }
@@ -911,6 +909,7 @@ namespace TFG.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public Dada(Dada other) : this() {
+      nomVariable_ = other.nomVariable_;
       valor_ = other.valor_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -921,8 +920,20 @@ namespace TFG.Protobuf {
       return new Dada(this);
     }
 
+    /// <summary>Field number for the "nomVariable" field.</summary>
+    public const int NomVariableFieldNumber = 1;
+    private string nomVariable_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string NomVariable {
+      get { return nomVariable_; }
+      set {
+        nomVariable_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     /// <summary>Field number for the "valor" field.</summary>
-    public const int ValorFieldNumber = 1;
+    public const int ValorFieldNumber = 2;
     private double valor_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -948,6 +959,7 @@ namespace TFG.Protobuf {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (NomVariable != other.NomVariable) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(Valor, other.Valor)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -956,6 +968,7 @@ namespace TFG.Protobuf {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
+      if (NomVariable.Length != 0) hash ^= NomVariable.GetHashCode();
       if (Valor != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(Valor);
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -975,8 +988,12 @@ namespace TFG.Protobuf {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
+      if (NomVariable.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(NomVariable);
+      }
       if (Valor != 0D) {
-        output.WriteRawTag(9);
+        output.WriteRawTag(17);
         output.WriteDouble(Valor);
       }
       if (_unknownFields != null) {
@@ -989,8 +1006,12 @@ namespace TFG.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (NomVariable.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(NomVariable);
+      }
       if (Valor != 0D) {
-        output.WriteRawTag(9);
+        output.WriteRawTag(17);
         output.WriteDouble(Valor);
       }
       if (_unknownFields != null) {
@@ -1003,6 +1024,9 @@ namespace TFG.Protobuf {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
+      if (NomVariable.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(NomVariable);
+      }
       if (Valor != 0D) {
         size += 1 + 8;
       }
@@ -1017,6 +1041,9 @@ namespace TFG.Protobuf {
     public void MergeFrom(Dada other) {
       if (other == null) {
         return;
+      }
+      if (other.NomVariable.Length != 0) {
+        NomVariable = other.NomVariable;
       }
       if (other.Valor != 0D) {
         Valor = other.Valor;
@@ -1036,7 +1063,11 @@ namespace TFG.Protobuf {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 9: {
+          case 10: {
+            NomVariable = input.ReadString();
+            break;
+          }
+          case 17: {
             Valor = input.ReadDouble();
             break;
           }
@@ -1055,7 +1086,11 @@ namespace TFG.Protobuf {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 9: {
+          case 10: {
+            NomVariable = input.ReadString();
+            break;
+          }
+          case 17: {
             Valor = input.ReadDouble();
             break;
           }
@@ -1066,16 +1101,16 @@ namespace TFG.Protobuf {
 
   }
 
-  public sealed partial class DatesConsulta : pb::IMessage<DatesConsulta>
+  public sealed partial class ConsultaDades : pb::IMessage<ConsultaDades>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<DatesConsulta> _parser = new pb::MessageParser<DatesConsulta>(() => new DatesConsulta());
+    private static readonly pb::MessageParser<ConsultaDades> _parser = new pb::MessageParser<ConsultaDades>(() => new ConsultaDades());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<DatesConsulta> Parser { get { return _parser; } }
+    public static pb::MessageParser<ConsultaDades> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -1091,7 +1126,7 @@ namespace TFG.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public DatesConsulta() {
+    public ConsultaDades() {
       OnConstruction();
     }
 
@@ -1099,59 +1134,44 @@ namespace TFG.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public DatesConsulta(DatesConsulta other) : this() {
-      dataInici_ = other.dataInici_ != null ? other.dataInici_.Clone() : null;
-      dataFi_ = other.dataFi_ != null ? other.dataFi_.Clone() : null;
+    public ConsultaDades(ConsultaDades other) : this() {
+      nomVariable_ = other.nomVariable_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public DatesConsulta Clone() {
-      return new DatesConsulta(this);
+    public ConsultaDades Clone() {
+      return new ConsultaDades(this);
     }
 
-    /// <summary>Field number for the "dataInici" field.</summary>
-    public const int DataIniciFieldNumber = 1;
-    private global::Google.Protobuf.WellKnownTypes.Timestamp dataInici_;
+    /// <summary>Field number for the "nomVariable" field.</summary>
+    public const int NomVariableFieldNumber = 1;
+    private static readonly pb::FieldCodec<string> _repeated_nomVariable_codec
+        = pb::FieldCodec.ForString(10);
+    private readonly pbc::RepeatedField<string> nomVariable_ = new pbc::RepeatedField<string>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Google.Protobuf.WellKnownTypes.Timestamp DataInici {
-      get { return dataInici_; }
-      set {
-        dataInici_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "dataFi" field.</summary>
-    public const int DataFiFieldNumber = 2;
-    private global::Google.Protobuf.WellKnownTypes.Timestamp dataFi_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Google.Protobuf.WellKnownTypes.Timestamp DataFi {
-      get { return dataFi_; }
-      set {
-        dataFi_ = value;
-      }
+    public pbc::RepeatedField<string> NomVariable {
+      get { return nomVariable_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as DatesConsulta);
+      return Equals(other as ConsultaDades);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(DatesConsulta other) {
+    public bool Equals(ConsultaDades other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(DataInici, other.DataInici)) return false;
-      if (!object.Equals(DataFi, other.DataFi)) return false;
+      if(!nomVariable_.Equals(other.nomVariable_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1159,8 +1179,7 @@ namespace TFG.Protobuf {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (dataInici_ != null) hash ^= DataInici.GetHashCode();
-      if (dataFi_ != null) hash ^= DataFi.GetHashCode();
+      hash ^= nomVariable_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1179,14 +1198,7 @@ namespace TFG.Protobuf {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (dataInici_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(DataInici);
-      }
-      if (dataFi_ != null) {
-        output.WriteRawTag(18);
-        output.WriteMessage(DataFi);
-      }
+      nomVariable_.WriteTo(output, _repeated_nomVariable_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1197,14 +1209,7 @@ namespace TFG.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (dataInici_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(DataInici);
-      }
-      if (dataFi_ != null) {
-        output.WriteRawTag(18);
-        output.WriteMessage(DataFi);
-      }
+      nomVariable_.WriteTo(ref output, _repeated_nomVariable_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1215,12 +1220,7 @@ namespace TFG.Protobuf {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (dataInici_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(DataInici);
-      }
-      if (dataFi_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(DataFi);
-      }
+      size += nomVariable_.CalculateSize(_repeated_nomVariable_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1229,22 +1229,11 @@ namespace TFG.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(DatesConsulta other) {
+    public void MergeFrom(ConsultaDades other) {
       if (other == null) {
         return;
       }
-      if (other.dataInici_ != null) {
-        if (dataInici_ == null) {
-          DataInici = new global::Google.Protobuf.WellKnownTypes.Timestamp();
-        }
-        DataInici.MergeFrom(other.DataInici);
-      }
-      if (other.dataFi_ != null) {
-        if (dataFi_ == null) {
-          DataFi = new global::Google.Protobuf.WellKnownTypes.Timestamp();
-        }
-        DataFi.MergeFrom(other.DataFi);
-      }
+      nomVariable_.Add(other.nomVariable_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -1261,17 +1250,7 @@ namespace TFG.Protobuf {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            if (dataInici_ == null) {
-              DataInici = new global::Google.Protobuf.WellKnownTypes.Timestamp();
-            }
-            input.ReadMessage(DataInici);
-            break;
-          }
-          case 18: {
-            if (dataFi_ == null) {
-              DataFi = new global::Google.Protobuf.WellKnownTypes.Timestamp();
-            }
-            input.ReadMessage(DataFi);
+            nomVariable_.AddEntriesFrom(input, _repeated_nomVariable_codec);
             break;
           }
         }
@@ -1290,17 +1269,7 @@ namespace TFG.Protobuf {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 10: {
-            if (dataInici_ == null) {
-              DataInici = new global::Google.Protobuf.WellKnownTypes.Timestamp();
-            }
-            input.ReadMessage(DataInici);
-            break;
-          }
-          case 18: {
-            if (dataFi_ == null) {
-              DataFi = new global::Google.Protobuf.WellKnownTypes.Timestamp();
-            }
-            input.ReadMessage(DataFi);
+            nomVariable_.AddEntriesFrom(ref input, _repeated_nomVariable_codec);
             break;
           }
         }

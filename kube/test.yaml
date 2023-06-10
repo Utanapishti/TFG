@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: generador
+  labels:
+    name: generador
+spec:
+  containers:
+  - name: generador
+    image: generador
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+

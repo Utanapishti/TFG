@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using TipusDades;
 using Google.Protobuf.WellKnownTypes;
 using Google.Protobuf;
+using TFG.Protobuf;
 
 namespace Protocol
 {
     public static class ProtocolDadaGenerada
     {
-        public static byte[] GeneratePayload(DadaGenerada dada) 
+        public static byte[] GeneratePayload(TipusDades.DadaGenerada dada) 
         {
             TFG.Protobuf.DadaGenerada message = new TFG.Protobuf.DadaGenerada();
             message.Valor=dada.Valor;
@@ -19,17 +20,17 @@ namespace Protocol
             return MessageExtensions.ToByteArray(message);
         }
         
-        public static DadaGenerada Parse(byte[] payload)
+        public static TipusDades.DadaGenerada Parse(byte[] payload)
         {
             var message = TFG.Protobuf.DadaGenerada.Parser.ParseFrom(payload);
 
-            return new DadaGenerada(message.NomSensor, message.Valor);
+            return new TipusDades.DadaGenerada(message.NomSensor, message.Valor);
         }
     }
 
     public static class ProtocolDadaCalculada
     {
-        public static byte[] GeneratePayload(DadaCalculada dada)
+        public static byte[] GeneratePayload(TipusDades.DadaCalculada dada)
         {
             TFG.Protobuf.DadaCalculada message = new();
             message.Valor= dada.Valor;
@@ -38,10 +39,10 @@ namespace Protocol
             return MessageExtensions.ToByteArray(message);
         }
 
-        public static DadaCalculada Parse(byte[] payload)
+        public static TipusDades.DadaCalculada Parse(byte[] payload)
         {
             var message=TFG.Protobuf.DadaCalculada.Parser.ParseFrom(payload);
-            return new DadaCalculada(message.NomVariable,message.Valor,message.Timestamp);
+            return new TipusDades.DadaCalculada(message.NomVariable,message.Valor,message.Timestamp);
         }
     }
 
@@ -63,27 +64,26 @@ namespace Protocol
         }
     }*/
 
-    public static class ProtocolDatesConsulta
+    public static class ProtocolConsultaDades
     {
-        public static byte[] GeneratePayload(DatesConsulta consulta)
+        public static byte[] GeneratePayload(string[] nomsVariables)
         {
-            TFG.Protobuf.DatesConsulta message = new TFG.Protobuf.DatesConsulta();
-            message.DataInici = Timestamp.FromDateTime(consulta.DataInici);
-            message.DataFi = Timestamp.FromDateTime(consulta.DataFi);
+            TFG.Protobuf.ConsultaDades message = new TFG.Protobuf.ConsultaDades();
+            message.NomVariable.AddRange(nomsVariables);            
             return MessageExtensions.ToByteArray(message);
         }
 
-        public static DatesConsulta Parse(byte[] payload)
+        public static string[] Parse(byte[] payload)
         {
-            var message=TFG.Protobuf.DatesConsulta.Parser.ParseFrom(payload);
+            var message=TFG.Protobuf.ConsultaDades.Parser.ParseFrom(payload);
 
-            return new DatesConsulta(message.DataInici.ToDateTime(),message.DataFi.ToDateTime());
+            return message.NomVariable.ToArray();
         }
     }
 
     public static class ProtocolRespostaDades
     {
-        public static byte[] GeneratePayload(RespostaDades resposta)
+        public static byte[] GeneratePayload(TipusDades.RespostaDades resposta)
         {
             TFG.Protobuf.RespostaDades message = new TFG.Protobuf.RespostaDades();
             message.Dades.AddRange(resposta.Dades.Select(dada => new TFG.Protobuf.Dada()

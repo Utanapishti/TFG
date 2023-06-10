@@ -7,12 +7,12 @@ option csharp_namespace = "TFG.Protobuf.GRPC";
 message PeticioValor
 {
 	string nomVariable = 1;
+	uint32 timestampValor = 2;
 }
 
 message RespostaPeticioValor
 {
-	double valor=1;	
-	uint32 timestampRebut=2;
+	double valor=1;		
 }
 
 service ValorService {
