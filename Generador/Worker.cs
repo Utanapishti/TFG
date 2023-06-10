@@ -1,3 +1,4 @@
+using GRPC;
 using Messaging;
 using Microsoft.Extensions.Options;
 using MockedSensor;
@@ -12,6 +13,7 @@ namespace Generador
         DataGenerator _dataGenerator;
         TimeSpan _delay;
         string _name;
+        HealthRPCServer _rpcServer;
 
         public Worker(ILogger<Worker> logger, IOptions<ConnectionOptions> connectionOptions, IOptions<GeneradorOptions> options)
         {
@@ -20,12 +22,15 @@ namespace Generador
             _dataGenerator = new DataGenerator(options.Value.Values);
             _delay = options.Value.Interval;
             _name = options.Value.Name;
-            
+            _rpcServer = new HealthRPCServer();
+            _rpcServer.Start();
+            HealthService.Status = ServingStatus.NOT_SERVING;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             _publisher.Connect(stoppingToken);
+            HealthService.Status = ServingStatus.SERVING;
             while (!stoppingToken.IsCancellationRequested)
             {                
                 var valor = _dataGenerator.GetValue();
@@ -33,6 +38,7 @@ namespace Generador
                 _publisher.Publish(ProtocolDadaGenerada.GeneratePayload(new TipusDades.DadaGenerada(_name, valor)));
                 await Task.Delay(_delay, stoppingToken);
             }
+            HealthService.Status = ServingStatus.NOT_SERVING;
         }
     }
 }

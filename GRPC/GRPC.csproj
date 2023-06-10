@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Protobuf Include="../Protobufs/missatgesRPC.proto" Link="missatgesRPC.proto" />
+    <Protobuf Include="../Protobufs/healthRPC.proto" Link="healthRPC.proto" />
   </ItemGroup>
 
 </Project>

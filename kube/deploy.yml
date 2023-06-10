@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tfg
+spec:
+  selector:
+    matchLabels:
+      app: generador
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: generador-res
+         image: generador:stable
+         imagePullPolicy: IfNotPresent
+         env:
+           - name: Generador__Name
+             value: PIE_RES
+         resources:
+           limits:
+             memory: "32Mi"   
+             cpu: "1000m"         
+           requests:
+             memory: "8Mi"
+             cpu: "100m"
+      
+       - name: generador-per
+         image: generador:stable
+         imagePullPolicy: IfNotPresent
+         env:
+           - name: Generador__Name
+             value: PIE_PER
+         resources:
+           limits:
+             memory: "32Mi"   
+             cpu: "1000m"     
+           requests:
+             memory: "8Mi"
+             cpu: "100m"
+      
+       - name: generador-pre
+         image: generador:stable
+         imagePullPolicy: IfNotPresent
+         env:
+           - name: Generador__Name
+             value: METEO_PRE
+         resources:
+           limits:
+             memory: "32Mi"   
+             cpu: "1000m"         
+           requests:
+             memory: "8Mi"
+             cpu: "100m"

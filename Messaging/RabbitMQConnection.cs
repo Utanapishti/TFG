@@ -21,7 +21,7 @@ namespace Messaging
     {
         private IConnectionFactory _connectionFactory;
         private ILogger _logger;
-        private TimeSpan retryTime = TimeSpan.FromSeconds(30);
+        private TimeSpan retryTime = TimeSpan.FromSeconds(5);
         private IConnection _connection;
         protected RetryPolicy _policy;       
         private object _lockConnection = new object();
@@ -36,6 +36,8 @@ namespace Messaging
             {
                 HostName = options.Value.Host,
                 Port=options.Value.Port,
+                UserName=options.Value.User,
+                Password=options.Value.Password
             };
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _queueName = options.Value.Channel;

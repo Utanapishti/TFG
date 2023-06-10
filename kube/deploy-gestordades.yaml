@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: gestordades
+spec:
+      containers:
+      - name: gestordades
+        image: magatzem
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: RabbitMQDadesGenerades__User
+            valueFrom:  
+              secretKeyRef:
+                name: rabbitmq-default-user  
+                key: username        
+          - name: RabbitMQDadesGenerades__Password
+            valueFrom:  
+              secretKeyRef:
+                name: rabbitmq-default-user
+                key: password
+          - name: RabbitMQCalculDades__User
+            valueFrom:  
+              secretKeyRef:
+                name: rabbitmq-default-user  
+                key: username        
+          - name: RabbitMQCalculDades__Password
+            valueFrom:  
+              secretKeyRef:
+                name: rabbitmq-default-user
+                key: password
+        resources:
+          limits:
+            memory: "128Mi"   
+            cpu: "200m"         
+          requests:
+            memory: "8Mi"
+            cpu: "100m"
+        ports:
+          - containerPort: 5098
+        livenessProbe:
+          grpc:
+            port: 5098
+          initialDelaySeconds: 1
+        readinessProbe:      
+          grpc:
+            port: 5098
+          initialDelaySeconds: 1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gestordades-rpc
+spec:
+  selector:
+    app: gestordades
+  ports:
+  - port: 5098
+    targetPort: 5098
+

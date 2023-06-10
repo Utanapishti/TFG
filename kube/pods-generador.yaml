@@ -60,7 +60,7 @@ spec:
             key: password
     resources:
       limits:
-        memory: "32Mi"   
+        memory: "128Mi"   
         cpu: "1000m"         
       requests:
         memory: "8Mi"

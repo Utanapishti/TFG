@@ -1,4 +1,5 @@
 import traceback
+import os
 import functools
 from sqlite3 import Timestamp
 import pika
@@ -158,6 +159,12 @@ configGRPC=config['GRPCValors']
 valorsVariables = {}        
 funcions = {}
 queueName = configRabbitMQ['Channel']
+user = configRabbitMQ.get('User')
+password=configRabbitMQ.get('Password')
+if user is None:
+    user = os.environ.get("RabbitMQCalculDades__User")
+if password is None:
+    password = os.environ.get("RabbitMQCalculDades__Password")
 for configFunction in configFunctions['FunctionsDefinition']['Functions']:
     function = Funcio()    
     function.Name = configFunction['Function']
@@ -173,8 +180,8 @@ while True:
         peticio = missatgesRPC_pb2.PeticioValor()
         peticio.nomVariable='TEST'
         resultat = stubValorService.Valor(peticio);
-
-        connection = pika.BlockingConnection(pika.ConnectionParameters(host=configRabbitMQ['Host'],port=configRabbitMQ['Port']))
+        credentials = pika.PlainCredentials(user, password)
+        connection = pika.BlockingConnection(pika.ConnectionParameters(host=configRabbitMQ['Host'],port=configRabbitMQ['Port'],credentials=credentials))
         channelRabbitMQ = connection.channel()
         print("Connected")
         threads = []

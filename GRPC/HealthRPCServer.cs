@@ -1,26 +1,23 @@
 ﻿using Grpc.Core;
-using Grpc.Core.Logging;
-using GRPCServer.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TFG.Protobuf.GRPC;
 
 namespace GRPC
 {
-    public class RPCServer
+    public class HealthRPCServer
     {
         private Server _server;
 
-        public RPCServer(ValorService.ValorServiceBase valorServiceImpl)
+        public HealthRPCServer()
         {
             _server = new Server()
             {
-                Services = { ValorService.BindService(valorServiceImpl) },
-                Ports = { new ServerPort("localhost", 5098, ServerCredentials.Insecure) }
-            };                        
+                Services = { Grpc.Health.V1.Health.BindService(new HealthService()) },
+                Ports = { new ServerPort("0.0.0.0", 5098, ServerCredentials.Insecure) }
+            };
         }
 
         public void Start()
