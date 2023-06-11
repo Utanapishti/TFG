@@ -202,7 +202,7 @@ while True:
             exit
     except Exception as e:
         print(str(datetime.now()) + ": Connection failed "+str(e))
-        print_exception(e)
+        print(e)
         time.sleep(30)
         continue
         

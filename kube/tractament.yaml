@@ -16,6 +16,8 @@ spec:
         image: tractament
         imagePullPolicy: IfNotPresent        
         env:
+            - name: PYTHONUNBUFFERED
+              value: "1"
             - name: RabbitMQCalculDades__User
               valueFrom:  
                 secretKeyRef:
@@ -30,3 +32,22 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "500m"        
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: tractament
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: tractament
+  minReplicas: 1
+  maxReplicas: 3
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50

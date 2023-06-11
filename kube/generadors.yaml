@@ -19,7 +19,7 @@ spec:
         imagePullPolicy: IfNotPresent
         env:
           - name: Generador__Interval
-            value: "0"
+            value: "5"
           - name: Generador__Name
             value: PIE_RES
           - name: RabbitMQDadesGenerades__User
@@ -32,7 +32,10 @@ spec:
               secretKeyRef:
                 name: rabbitmq-default-user
                 key: password
-        resources:       
+        resources: 
+          limits:
+            memory: "128Mi"   
+            cpu: "200m"                 
           requests:
             memory: "8Mi"
             cpu: "100m"
@@ -64,7 +67,7 @@ spec:
         imagePullPolicy: IfNotPresent
         env:
           - name: Generador__Interval
-            value: "0"
+            value: "5"
           - name: Generador__Name
             value: PIE_PER
           - name: RabbitMQDadesGenerades__User
@@ -112,7 +115,7 @@ spec:
         imagePullPolicy: IfNotPresent
         env:
           - name: Generador__Interval
-            value: "0"
+            value: "5"
           - name: Generador__Name
             value: METEO_PRE
           - name: RabbitMQDadesGenerades__User

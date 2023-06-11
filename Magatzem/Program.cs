@@ -11,9 +11,11 @@ IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((context, services) =>
     {
         services.Configure<GeneradorConnectionOptions>(context.Configuration.GetSection("RabbitMQDadesGenerades"));
-        services.Configure<TractamentConnectionOptions>(context.Configuration.GetSection("RabbitMQCalculDades"));
+        services.Configure<TractamentConnection>(context.Configuration.GetSection("RabbitMQCalculDades"));
         services.Configure<GestorFuncionsOptions>(context.Configuration.GetSection("FunctionsDefinition"));        
         services.AddSingleton<GestorFuncions>();
+        services.AddTransient<GeneradorConnection>();
+        services.AddTransient<TractamentConnection>();
         services.AddHostedService<Worker>();        
     })
     .Build();

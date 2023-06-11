@@ -4,8 +4,11 @@ using Messaging;
 IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((context, services) =>
     {        
-        services.Configure<ConnectionOptions>(context.Configuration.GetSection("RabbitMQDadesGenerades"));        
-        services.Configure<GeneradorOptions>(context.Configuration.GetSection("Generador"));        
+        services.Configure<ConnectionOptions>
+            (context.Configuration.GetSection("RabbitMQDadesGenerades"));        
+        services.Configure<GeneradorOptions>
+            (context.Configuration.GetSection("Generador"));
+        services.AddTransient<RabbitMQConnection>();
         services.AddHostedService<Worker>();
     })
     .Build();

@@ -31,7 +31,7 @@ namespace Messaging
         private PublicationAddress _publicationAddress;
         IBasicProperties _properties;
 
-        public RabbitMQConnection(ILogger logger,IOptions<ConnectionOptions> options) {
+        public RabbitMQConnection(ILogger<RabbitMQConnection> logger,IOptions<ConnectionOptions> options) {
             _connectionFactory = new ConnectionFactory()
             {
                 HostName = options.Value.Host,

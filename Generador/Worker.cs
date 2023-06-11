@@ -15,10 +15,11 @@ namespace Generador
         string _name;
         HealthRPCServer _rpcServer;
 
-        public Worker(ILogger<Worker> logger, IOptions<ConnectionOptions> connectionOptions, IOptions<GeneradorOptions> options)
+        public Worker(ILogger<Worker> logger, RabbitMQConnection connection, IOptions<GeneradorOptions> options)
         {
             _logger = logger;
-            _publisher = new RabbitMQConnection(logger, connectionOptions);            
+            //_publisher = new RabbitMQConnection(logger, connectionOptions);            
+            _publisher = connection;
             _dataGenerator = new DataGenerator(options.Value.Values);
             _delay = options.Value.Interval;
             _name = options.Value.Name;

@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: gestordades
-        image: magatzem
+        image: gestordades
         imagePullPolicy: IfNotPresent
         env:
           - name: RabbitMQDadesGenerades__User
@@ -39,7 +39,7 @@ spec:
         resources:
           limits:
             memory: "128Mi"   
-            cpu: "200m"         
+            cpu: "1000m"         
           requests:
             memory: "8Mi"
             cpu: "100m"
@@ -64,4 +64,5 @@ spec:
   ports:
   - port: 5098
     targetPort: 5098
+
 

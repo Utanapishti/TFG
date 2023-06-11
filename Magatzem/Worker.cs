@@ -17,19 +17,16 @@ namespace Magatzem
         private readonly GestorFuncions _gestorFuncions;
         private readonly ValorsRPCServer _rpcServer;
 
-        public Worker(ILogger<Worker> logger, IOptions<TractamentConnectionOptions> tractamentOptions, IOptions<GeneradorConnectionOptions> generadorOptions ,GestorFuncions gestorFuncions)
+        public Worker(ILogger<Worker> logger, TractamentConnection tractamentConnection, GeneradorConnection generadorConnection,GestorFuncions gestorFuncions)
         {            
             _gestorFuncions = gestorFuncions;
             _gestorFuncions.PeticioCalcul = PeticioCalcul;
             _rpcServer = new ValorsRPCServer(new ValorServiceImpl(logger,gestorFuncions));
             _rpcServer.Start();            
             HealthService.Status = ServingStatus.NOT_SERVING;
-            _logger = logger;
-            _logger.LogInformation(tractamentOptions.Value.User);
-            _conTractament = new RabbitMQConnection(_logger, tractamentOptions);
-            _logger.LogInformation(generadorOptions.Value.User);
+            _conTractament = tractamentConnection;
             _conTractament.Received += _conTractament_Received;
-            _conGenerador = new RabbitMQConnection(_logger, generadorOptions);
+            _conGenerador = generadorConnection;
             _conGenerador.Received += _subscriber_Received;
         }
 
