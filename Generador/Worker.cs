@@ -11,7 +11,7 @@ namespace Generador
         private readonly ILogger<Worker> _logger;
         RabbitMQConnection _publisher;
         DataGenerator _dataGenerator;
-        TimeSpan _delay;
+        int _delay;
         string _name;
         HealthRPCServer _rpcServer;
 

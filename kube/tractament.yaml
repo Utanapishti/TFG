@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tractament
+spec:
+  selector:
+    matchLabels:
+      app: tractament
+  template:
+    metadata:
+      labels:
+        app: tractament
+    spec:
+      containers:
+      - name: tractament
+        image: tractament
+        imagePullPolicy: IfNotPresent        
+        env:
+            - name: RabbitMQCalculDades__User
+              valueFrom:  
+                secretKeyRef:
+                  name: rabbitmq-default-user  
+                  key: username        
+            - name: RabbitMQCalculDades__Password
+              valueFrom:  
+                secretKeyRef:
+                  name: rabbitmq-default-user
+                  key: password        
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"        
