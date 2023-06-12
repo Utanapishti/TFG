@@ -13,11 +13,15 @@ namespace GRPC
     {
         private Server _server;
 
-        public ValorsRPCServer(ValorService.ValorServiceBase valorServiceImpl)
+        public ValorsRPCServer(ValorService.ValorServiceBase valorServiceImpl, StatusService.StatusServiceBase statusServiceImpl)
         {
             _server = new Server()
             {
-                Services = { ValorService.BindService(valorServiceImpl), Grpc.Health.V1.Health.BindService(new HealthService()) },
+                Services = { 
+                    ValorService.BindService(valorServiceImpl), 
+                    StatusService.BindService(statusServiceImpl),
+                    Grpc.Health.V1.Health.BindService(new HealthService()) 
+                },
                 Ports = { new ServerPort("0.0.0.0", 5098, ServerCredentials.Insecure) }
             };                        
         }

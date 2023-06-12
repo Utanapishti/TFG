@@ -2,10 +2,13 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gestordades
+  labels:
+    app: gestordades
 spec:
   selector:
     matchLabels:
       app: gestordades
+  replicas: 1
   template:
     metadata:
       labels:
@@ -26,12 +29,12 @@ spec:
               secretKeyRef:
                 name: rabbitmq-default-user
                 key: password
-          - name: RabbitMQCalculDades__User
+          - name: RabbitMQDadesCalculades__User
             valueFrom:  
               secretKeyRef:
                 name: rabbitmq-default-user  
                 key: username        
-          - name: RabbitMQCalculDades__Password
+          - name: RabbitMQDadesCalculades__Password
             valueFrom:  
               secretKeyRef:
                 name: rabbitmq-default-user
@@ -44,7 +47,8 @@ spec:
             memory: "8Mi"
             cpu: "100m"
         ports:
-          - containerPort: 5098
+          - name: grpc
+            containerPort: 5098
         livenessProbe:
           grpc:
             port: 5098

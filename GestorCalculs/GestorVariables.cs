@@ -22,6 +22,11 @@ namespace GestorCalculs
             }
         }
 
+        internal IEnumerable<string> GetNomsVariables()
+        {
+            return variables.Keys;
+        }
+
         internal Dada AfegirDada(string nomVariable, uint ts, double valor)
         {
             var variable=GetVariable(nomVariable);

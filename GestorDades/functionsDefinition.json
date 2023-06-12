@@ -1,0 +1,82 @@
+{
+  "FunctionsDefinition": {
+    "Functions": [
+      {
+        "ReturnVariable": "A1",
+        "Function": "Multiplica10",
+        "Parameters": [
+          {
+            "Name": "valor",
+            "AssociatedVariable": "A0"
+          }
+        ]
+      },
+      {
+        "ReturnVariable": "B1",
+        "Function": "Multiplica100",
+        "Parameters": [
+          {
+            "Name": "valor",
+            "AssociatedVariable": "B0"
+          }
+        ]
+      },
+      {
+        "ReturnVariable": "C1",
+        "Function": "Multiplica100",
+        "Parameters": [
+          {
+            "Name": "valor",
+            "AssociatedVariable": "C0"
+          }
+        ]
+      },
+      {
+        "ReturnVariable": "Total",
+        "Function": "Suma",
+        "Parameters": [
+          {
+            "Name": "primer",
+            "AssociatedVariable": "A1"
+          },
+          {
+            "Name": "segon",
+            "AssociatedVariable": "B1"
+          },
+          {
+            "Name": "tercer",
+            "AssociatedVariable": "C0"
+          }
+        ]
+      },
+      {
+        "ReturnVariable": "PIE1_TEMP",
+        "Function": "TemperaturaPiezometre4500",
+        "Parameters": [
+          {
+            "Name": "resistencia",
+            "AssociatedVariable": "PIE1_RES"
+          }
+        ]
+      },
+      {
+        "ReturnVariable": "PIE1_PRE",
+        "Function": "PressioPiezometre4500",
+        "Parameters": [
+          {
+            "Name": "periode",
+            "AssociatedVariable": "PIE1_PER"
+          },
+          {
+            "Name": "temperatura",
+            "AssociatedVariable": "PIE1_TEMP"
+          },
+          {
+            "Name": "pressioAtmosferica",
+            "AssociatedVariable": "METEO_PRE"
+          }
+        ]
+      }
+    ]
+  }
+}

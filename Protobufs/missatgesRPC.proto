@@ -6,8 +6,8 @@ option csharp_namespace = "TFG.Protobuf.GRPC";
 
 message PeticioValor
 {
-	string nomVariable = 1;
-	uint32 timestampValor = 2;
+	string nomVariable = 1;	
+	uint32 timestampValor=2;
 }
 
 message RespostaPeticioValor
@@ -16,6 +16,19 @@ message RespostaPeticioValor
 	bool correcte=2;
 }
 
+message PeticioStatus {}
+
+message RespostaStatus
+{
+	string nomVariable=1;
+	double valor=2;
+	uint32 timestamp=3;
+}
+
 service ValorService {
   rpc Valor (PeticioValor) returns (RespostaPeticioValor) {}
+}
+
+service StatusService {
+	rpc GetStatus(PeticioStatus) returns (stream RespostaStatus) {}
 }

@@ -56,6 +56,11 @@ namespace GestorCalculs
             }
         }    
 
+        public IEnumerable<string> GetNomsVariables()
+        {
+            return _variables.GetNomsVariables();
+        }
+
 
         public void RebutDada(string nomVariable,double valor)
         {

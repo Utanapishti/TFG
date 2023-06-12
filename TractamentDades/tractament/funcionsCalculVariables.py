@@ -1,10 +1,19 @@
 def Multiplica10(valor):
+    x = valor
+    for i in range(10000):
+        x = x*x
     return valor*10
 
 def Multiplica100(valor):
+    x = valor
+    for i in range(10000):
+        x = x*x
     return valor*100
 
 def Suma(primer, segon, tercer):
+    x = primer
+    for i in range(10000):
+        x = x*x
     return primer+segon+tercer
 
 def TemperaturaPiezometre4500(resistencia):

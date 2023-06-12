@@ -1,0 +1,145 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: generador-a
+  labels:
+    app: generador
+spec:
+  selector:
+    matchLabels:
+      app: generador
+  template:
+    metadata:
+      labels:
+        app: generador
+    spec:
+      containers:
+      - name: generador
+        image: generador
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: Generador__Interval
+            value: "5"
+          - name: Generador__Name
+            value: A0
+          - name: RabbitMQDadesGenerades__User
+            valueFrom:  
+              secretKeyRef:
+                name: rabbitmq-default-user  
+                key: username        
+          - name: RabbitMQDadesGenerades__Password
+            valueFrom:  
+              secretKeyRef:
+                name: rabbitmq-default-user
+                key: password
+        resources: 
+          limits:
+            memory: "128Mi"   
+            cpu: "200m"                 
+          requests:
+            memory: "8Mi"
+            cpu: "100m"
+        livenessProbe:
+          grpc:
+            port: 5098
+          initialDelaySeconds: 5
+        readinessProbe:      
+          grpc:
+            port: 5098
+          initialDelaySeconds: 5          
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: generador-b
+spec:
+  selector:
+    matchLabels:
+      app: generador
+  template:
+    metadata:
+      labels:
+        app: generador
+    spec:
+      containers:
+      - name: generador
+        image: generador
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: Generador__Interval
+            value: "5"
+          - name: Generador__Name
+            value: B0
+          - name: RabbitMQDadesGenerades__User
+            valueFrom:  
+              secretKeyRef:
+                name: rabbitmq-default-user  
+                key: username        
+          - name: RabbitMQDadesGenerades__Password
+            valueFrom:  
+              secretKeyRef:
+                name: rabbitmq-default-user
+                key: password
+        resources:
+          limits:
+            memory: "512Mi"   
+            cpu: "1000m"         
+          requests:
+            memory: "8Mi"
+            cpu: "100m"
+        livenessProbe:
+          grpc:
+            port: 5098
+          initialDelaySeconds: 5
+        readinessProbe:      
+          grpc:
+            port: 5098
+          initialDelaySeconds: 5  
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: generador-c
+spec:
+  selector:
+    matchLabels:
+      app: generador
+  template:
+    metadata:
+      labels:
+        app: generador
+    spec:
+      containers:      
+      - name: generador
+        image: generador
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: Generador__Interval
+            value: "5"
+          - name: Generador__Name
+            value: C0
+          - name: RabbitMQDadesGenerades__User
+            valueFrom:  
+              secretKeyRef:
+                name: rabbitmq-default-user  
+                key: username        
+          - name: RabbitMQDadesGenerades__Password
+            valueFrom:  
+              secretKeyRef:
+                name: rabbitmq-default-user
+                key: password
+        resources:
+          limits:
+            memory: "512Mi"   
+            cpu: "1000m"         
+          requests:
+            memory: "8Mi"
+            cpu: "100m"
+        livenessProbe:
+          grpc:
+            port: 5098
+          initialDelaySeconds: 5
+        readinessProbe:      
+          grpc:
+            port: 5098
+          initialDelaySeconds: 5            

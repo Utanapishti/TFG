@@ -45,13 +45,25 @@ services:
     image: ${DOCKER_REGISTRY-}gestordades
     build:
       context: .
-      dockerfile: Magatzem/Dockerfile
+      dockerfile: GestorDades/Dockerfile
     ports:
         - 5098:5098
     depends_on:
       - 'rabbitmq'
     networks:
       - sensor_net
+
+  webapi:
+    image: ${DOCKER_REGISTRY-}webapi
+    build:
+      context: .
+      dockerfile: WebAPI/Dockerfile
+    ports:
+        - 80:80
+        - 443:443
+    networks:
+      - sensor_net 
+
 
   tractament:    
     image: ${DOCKER_REGISTRY-}tractament    
