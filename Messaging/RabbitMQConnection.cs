@@ -25,10 +25,10 @@ namespace Messaging
         private IConnection _connection;
         protected RetryPolicy _policy;       
         private object _lockConnection = new object();
+        private CancellationToken _cancelToken;
         IModel? _model;
-        string _queueName;
+        string _exchange;
         public event EventHandler<BasicDeliverEventArgs> Received;
-        private PublicationAddress _publicationAddress;
         IBasicProperties _properties;
 
         public RabbitMQConnection(ILogger<RabbitMQConnection> logger,IOptions<ConnectionOptions> options) {
@@ -40,53 +40,70 @@ namespace Messaging
                 Password=options.Value.Password
             };
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _queueName = options.Value.Channel;
-            _publicationAddress = new PublicationAddress(ExchangeType.Direct, string.Empty, _queueName);
+            _exchange = options.Value.Exchange;            
         }
 
-        public void ConnectAndSubscribe(CancellationToken cancelToken)
+        public void ConnectAndSubscribe(CancellationToken cancelToken, string[] topics=null)
         {
             var policy = RetryPolicy.HandleResult<bool>(false).WaitAndRetryForever<bool>(i => retryTime);
             policy.Execute(() => Connect(cancelToken));
-            Subscribe();
+            Subscribe(topics);
         }
 
         public bool Connect(CancellationToken cancelToken)
         {
             _logger.LogInformation("Connecting to RabbitMQ queue");
+            _cancelToken = cancelToken;
 
-            _model = ConnectModel(cancelToken);
+            _model = ConnectModel();
             if (_model != null)
-            {
-                _model.QueueDeclare(queue: _queueName, durable: true, exclusive: false, autoDelete: false);
-                _properties = _model.CreateBasicProperties();
-                _properties.DeliveryMode = 2;
+            {                
+                _properties = _model.CreateBasicProperties();                
+                _properties.Persistent = true;
+                _model.ExchangeDeclare(_exchange, ExchangeType.Direct, true, false);
             }
             else _logger.LogInformation("Connection failed");
 
             return _model != null;
         }
 
-        public void Subscribe()
+        public void Subscribe(string[] topics)
         {
             _logger.LogInformation("Connecting to RabbitMQ queue");
 
             if (_model != null)
             {
-                var queue = _model.QueueDeclare(_queueName, true, false, false, null);
+                var queueName = _model.QueueDeclare().QueueName;
+                if (topics == null || topics.Length == 0)
+                {
+                    _model.QueueBind(queueName, _exchange, String.Empty);
+                }
+                else
+                {
+                    foreach (var topic in topics)
+                    {
+                        _model.QueueBind(queueName, _exchange, topic);
+                    }
+                }
                 var consumer = new EventingBasicConsumer(_model);
                 consumer.Received += Consumer_Received;
 
-                _model.BasicConsume(queue.QueueName, true, consumer);
+                _model.BasicConsume(queueName, false, consumer);
             }
             else _logger.LogInformation("Connection failed");
         }
-        public void Publish(byte[] data)
+        public void Publish(byte[] data,string topic="")
         {
+            var publicationAddress = new PublicationAddress(ExchangeType.Direct, _exchange, topic);
+
             _policy.Execute(() =>
             {                
-                _model.BasicPublish(_publicationAddress, _properties, data);
+                _model.BasicPublish(publicationAddress, _properties, data);
             });
+        }
+        public void AckMessage(ulong tag)
+        {            
+            _model?.BasicAck(tag, false);
         }
 
         private void Consumer_Received(object? sender, BasicDeliverEventArgs e)
@@ -94,8 +111,9 @@ namespace Messaging
             _logger.LogInformation("Received: " + Encoding.UTF8.GetString(e.Body.ToArray()));
             Received?.Invoke(this, e);
         }
+        
 
-        protected IModel? ConnectModel(CancellationToken cancelToken)
+        protected IModel? ConnectModel()
         {
             if ((_connection == null)
                 || (!_connection.IsOpen))
@@ -107,8 +125,8 @@ namespace Messaging
 
                     _policy.Execute((CancellationToken cancelToken) =>
                     {
-                        _connection = _connectionFactory.CreateConnection();                        
-                    }, cancelToken);
+                        _connection = _connectionFactory.CreateConnection();                                
+                    }, _cancelToken);
 
                     if ((_connection != null) && (_connection.IsOpen))
                     {
@@ -124,7 +142,7 @@ namespace Messaging
         private void _connection_ConnectionShutdown(object? sender, ShutdownEventArgs e)
         {
             _logger.LogInformation($"Connection shutdown {e.ReplyText}");
-            Connect(default);
+            Connect(_cancelToken);
         }
 
         public void TestSend() {

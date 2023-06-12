@@ -28,7 +28,7 @@ namespace TFG.Protobuf {
             "YRINCgV2YWxvchgBIAEoARIRCglub21TZW5zb3IYAiABKAkigwEKCkNhbGN1",
             "bERhZGESGAoQdmFyaWFibGVDYWxjdWxhchgBIAEoCRIWCg52YXJpYWJsZVJl",
             "YnVkYRgCIAEoCRISCgp2YWxvclJlYnV0GAMgASgBEhYKDnRpbWVzdGFtcFJl",
-            "YnV0GAQgASgNEhcKD3RpbWVzdGFtcEFjdHVhbBgFIAEoDSJGCg1EYWRhQ2Fs",
+            "YnV0GAQgASgNEhcKD3RpbWVzdGFtcEFsdHJlcxgFIAEoDSJGCg1EYWRhQ2Fs",
             "Y3VsYWRhEhMKC25vbVZhcmlhYmxlGAEgASgJEg0KBXZhbG9yGAIgASgBEhEK",
             "CXRpbWVzdGFtcBgDIAEoDSIqCgREYWRhEhMKC25vbVZhcmlhYmxlGAEgASgJ",
             "Eg0KBXZhbG9yGAIgASgBIiQKDUNvbnN1bHRhRGFkZXMSEwoLbm9tVmFyaWFi",
@@ -38,7 +38,7 @@ namespace TFG.Protobuf {
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::TFG.Protobuf.DadaGenerada), global::TFG.Protobuf.DadaGenerada.Parser, new[]{ "Valor", "NomSensor" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::TFG.Protobuf.CalculDada), global::TFG.Protobuf.CalculDada.Parser, new[]{ "VariableCalcular", "VariableRebuda", "ValorRebut", "TimestampRebut", "TimestampActual" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::TFG.Protobuf.CalculDada), global::TFG.Protobuf.CalculDada.Parser, new[]{ "VariableCalcular", "VariableRebuda", "ValorRebut", "TimestampRebut", "TimestampAltres" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::TFG.Protobuf.DadaCalculada), global::TFG.Protobuf.DadaCalculada.Parser, new[]{ "NomVariable", "Valor", "Timestamp" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::TFG.Protobuf.Dada), global::TFG.Protobuf.Dada.Parser, new[]{ "NomVariable", "Valor" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::TFG.Protobuf.ConsultaDades), global::TFG.Protobuf.ConsultaDades.Parser, new[]{ "NomVariable" }, null, null, null, null),
@@ -313,7 +313,7 @@ namespace TFG.Protobuf {
       variableRebuda_ = other.variableRebuda_;
       valorRebut_ = other.valorRebut_;
       timestampRebut_ = other.timestampRebut_;
-      timestampActual_ = other.timestampActual_;
+      timestampAltres_ = other.timestampAltres_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -371,15 +371,15 @@ namespace TFG.Protobuf {
       }
     }
 
-    /// <summary>Field number for the "timestampActual" field.</summary>
-    public const int TimestampActualFieldNumber = 5;
-    private uint timestampActual_;
+    /// <summary>Field number for the "timestampAltres" field.</summary>
+    public const int TimestampAltresFieldNumber = 5;
+    private uint timestampAltres_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint TimestampActual {
-      get { return timestampActual_; }
+    public uint TimestampAltres {
+      get { return timestampAltres_; }
       set {
-        timestampActual_ = value;
+        timestampAltres_ = value;
       }
     }
 
@@ -402,7 +402,7 @@ namespace TFG.Protobuf {
       if (VariableRebuda != other.VariableRebuda) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(ValorRebut, other.ValorRebut)) return false;
       if (TimestampRebut != other.TimestampRebut) return false;
-      if (TimestampActual != other.TimestampActual) return false;
+      if (TimestampAltres != other.TimestampAltres) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -414,7 +414,7 @@ namespace TFG.Protobuf {
       if (VariableRebuda.Length != 0) hash ^= VariableRebuda.GetHashCode();
       if (ValorRebut != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(ValorRebut);
       if (TimestampRebut != 0) hash ^= TimestampRebut.GetHashCode();
-      if (TimestampActual != 0) hash ^= TimestampActual.GetHashCode();
+      if (TimestampAltres != 0) hash ^= TimestampAltres.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -449,9 +449,9 @@ namespace TFG.Protobuf {
         output.WriteRawTag(32);
         output.WriteUInt32(TimestampRebut);
       }
-      if (TimestampActual != 0) {
+      if (TimestampAltres != 0) {
         output.WriteRawTag(40);
-        output.WriteUInt32(TimestampActual);
+        output.WriteUInt32(TimestampAltres);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -479,9 +479,9 @@ namespace TFG.Protobuf {
         output.WriteRawTag(32);
         output.WriteUInt32(TimestampRebut);
       }
-      if (TimestampActual != 0) {
+      if (TimestampAltres != 0) {
         output.WriteRawTag(40);
-        output.WriteUInt32(TimestampActual);
+        output.WriteUInt32(TimestampAltres);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -505,8 +505,8 @@ namespace TFG.Protobuf {
       if (TimestampRebut != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(TimestampRebut);
       }
-      if (TimestampActual != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(TimestampActual);
+      if (TimestampAltres != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(TimestampAltres);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -532,8 +532,8 @@ namespace TFG.Protobuf {
       if (other.TimestampRebut != 0) {
         TimestampRebut = other.TimestampRebut;
       }
-      if (other.TimestampActual != 0) {
-        TimestampActual = other.TimestampActual;
+      if (other.TimestampAltres != 0) {
+        TimestampAltres = other.TimestampAltres;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -567,7 +567,7 @@ namespace TFG.Protobuf {
             break;
           }
           case 40: {
-            TimestampActual = input.ReadUInt32();
+            TimestampAltres = input.ReadUInt32();
             break;
           }
         }
@@ -602,7 +602,7 @@ namespace TFG.Protobuf {
             break;
           }
           case 40: {
-            TimestampActual = input.ReadUInt32();
+            TimestampAltres = input.ReadUInt32();
             break;
           }
         }

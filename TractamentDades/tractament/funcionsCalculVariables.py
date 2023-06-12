@@ -1,3 +1,12 @@
+def Multiplica10(valor):
+    return valor*10
+
+def Multiplica100(valor):
+    return valor*100
+
+def Suma(primer, segon, tercer):
+    return primer+segon+tercer
+
 def TemperaturaPiezometre4500(resistencia):
     return (1/((1.12767e-3+(2.344442e-4*resistencia)+(8.476921e-8*resistencia**3)+(1.175122e-11*resistencia**5))))-273.15
 

@@ -1,6 +1,6 @@
 using GestorCalculs;
 using GRPC;
-using Magatzem;
+using GestorDades;
 using Messaging;
 using Scripting;
 
@@ -11,11 +11,12 @@ IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((context, services) =>
     {
         services.Configure<GeneradorConnectionOptions>(context.Configuration.GetSection("RabbitMQDadesGenerades"));
-        services.Configure<TractamentConnection>(context.Configuration.GetSection("RabbitMQCalculDades"));
-        services.Configure<GestorFuncionsOptions>(context.Configuration.GetSection("FunctionsDefinition"));        
+        services.Configure<TractamentConnectionOptions>(context.Configuration.GetSection("RabbitMQDadesCalculades"));
+        services.Configure<GestorFuncionsOptions>(context.Configuration.GetSection("FunctionsDefinition"));
+        services.AddSingleton<TractamentConnection>();
         services.AddSingleton<GestorFuncions>();
-        services.AddTransient<GeneradorConnection>();
-        services.AddTransient<TractamentConnection>();
+        services.AddSingleton<GeneradorConnection>();
+        services.AddSingleton<TractamentConnection>();
         services.AddHostedService<Worker>();        
     })
     .Build();

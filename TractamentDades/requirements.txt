@@ -2,4 +2,4 @@ pika
 protobuf
 google
 grpcio
-
+grpcio_tools

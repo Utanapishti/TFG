@@ -23,7 +23,7 @@ namespace GestorCalculs
             //and associate them by their parameters
             foreach (var functionOptions in options.Value.Functions)
             {
-                if (!_funcionsPerVariable.ContainsKey(functionOptions.Function))
+                if (!_funcionsPerVariable.ContainsKey(functionOptions.ReturnVariable))
                 {
                     //Create the script class
                     ParametreScript[] parameters = new ParametreScript[functionOptions.Parameters.Count()];
@@ -95,8 +95,17 @@ namespace GestorCalculs
                     //Envia el nom de la variable a calcular
                     //la dada rebuda
                     //el major ts dels paràmetres excepte la rebuda            
+                    uint tsAltres = 0;
+                    if (funcio.Parametres.Count()>1)
+                    {
+                        var parametreRebut = funcio.Parametres.Where(p => p.VariableAssociada == nomVariable);
+                        tsAltres = funcio.Parametres.Except(parametreRebut).Max(parametre => _variables.GetUltimTimestamp(parametre.VariableAssociada));
+                    }
+                    
+
+
                     if (PeticioCalcul != null)
-                        PeticioCalcul.Invoke(funcio.NomVariable, nomVariable, dada, funcio.Parametres.Max(parametre => _variables.GetUltimTimestamp(parametre.VariableAssociada)));
+                        PeticioCalcul.Invoke(funcio.NomVariable, nomVariable, dada, tsAltres);
                     else _logger.LogWarning("PeticioCalcul method undefined");
                 });
             }

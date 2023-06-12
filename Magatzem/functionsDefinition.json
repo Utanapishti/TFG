@@ -2,6 +2,54 @@
   "FunctionsDefinition": {
     "Functions": [
       {
+        "ReturnVariable": "A1",
+        "Function": "Multiplica10",
+        "Parameters": [
+          {
+            "Name": "valor",
+            "AssociatedVariable": "A0"
+          }
+        ]
+      },
+      {
+        "ReturnVariable": "B1",
+        "Function": "Multiplica100",
+        "Parameters": [
+          {
+            "Name": "valor",
+            "AssociatedVariable": "B0"
+          }
+        ]
+      },
+      {
+        "ReturnVariable": "C1",
+        "Function": "Multiplica100",
+        "Parameters": [
+          {
+            "Name": "valor",
+            "AssociatedVariable": "C0"
+          }
+        ]
+      },
+      {
+        "ReturnVariable": "Total",
+        "Function": "Suma",
+        "Parameters": [
+          {
+            "Name": "primer",
+            "AssociatedVariable": "A1"
+          },
+          {
+            "Name": "segon",
+            "AssociatedVariable": "B1"
+          },
+          {
+            "Name": "tercer",
+            "AssociatedVariable": "C0"
+          }
+        ]
+      },
+      {
         "ReturnVariable": "PIE1_TEMP",
         "Function": "TemperaturaPiezometre4500",
         "Parameters": [

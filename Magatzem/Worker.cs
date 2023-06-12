@@ -7,7 +7,7 @@ using Protocol;
 using TipusDades;
 
 
-namespace Magatzem
+namespace GestorDades
 {
     public class Worker : BackgroundService
     {
@@ -19,6 +19,7 @@ namespace Magatzem
 
         public Worker(ILogger<Worker> logger, TractamentConnection tractamentConnection, GeneradorConnection generadorConnection,GestorFuncions gestorFuncions)
         {            
+            _logger=logger;
             _gestorFuncions = gestorFuncions;
             _gestorFuncions.PeticioCalcul = PeticioCalcul;
             _rpcServer = new ValorsRPCServer(new ValorServiceImpl(logger,gestorFuncions));
@@ -36,6 +37,7 @@ namespace Magatzem
             var dadaCalculada =  ProtocolDadaCalculada.Parse(e.Body.ToArray());
             _gestorFuncions.RebutDadaCalculada(dadaCalculada.NomVariable, dadaCalculada.Valor,dadaCalculada.Timestamp);
             _logger.LogInformation("Received data from {name}: {valor}", dadaCalculada.NomVariable, dadaCalculada.Valor);
+            _conTractament.AckMessage(e.DeliveryTag);
         }
 
         private void PeticioCalcul(string variableCalcular, string variableRebuda, GestorCalculs.Dada dadaRebuda, uint tsAltresValors)
@@ -46,10 +48,12 @@ namespace Magatzem
                 VariableRebuda = variableRebuda,
                 ValorRebut=dadaRebuda.Valor,
                 TimestampRebut=dadaRebuda.Timestamp,
-                TimestampActual=tsAltresValors
+                TimestampAltres=tsAltresValors
             };
 
-            _conTractament.Publish(MessageExtensions.ToByteArray(calculDada));
+            _logger.LogInformation($"Peticio de calcul de la variable {variableCalcular} per recepció de {variableRebuda}. TS Rebut: {dadaRebuda.Timestamp} - TS Altres: {tsAltresValors}");
+
+            _conTractament.Publish(MessageExtensions.ToByteArray(calculDada), "peticioCalcul");
         }
 
         private void _subscriber_Received(object? sender, RabbitMQ.Client.Events.BasicDeliverEventArgs e)
@@ -58,12 +62,13 @@ namespace Magatzem
             var dadaRebuda = ProtocolDadaGenerada.Parse(e.Body.ToArray());
             _gestorFuncions.RebutDada(dadaRebuda.Name, dadaRebuda.Valor);
             _logger.LogInformation("Received data from {name}: {valor}", dadaRebuda.Name,dadaRebuda.Valor);
+            _conGenerador.AckMessage(e.DeliveryTag);
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             _logger.LogInformation("Connectant a cua de tractament...");
-            _conTractament.Connect(stoppingToken);
+            _conTractament.ConnectAndSubscribe(stoppingToken, new string[] { "resultatCalcul" });
             _logger.LogInformation("Connectant a cua de dades generades...");
             _conGenerador.ConnectAndSubscribe(stoppingToken);
             HealthService.Status = ServingStatus.SERVING;

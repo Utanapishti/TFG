@@ -20,7 +20,7 @@ def callback(ch, method, properties, body, args):
     print(" [x] Received %r" % body)
     calculDada = missatges_pb2.CalculDada()
     calculDada.ParseFromString(body)
-    print("Received petition for: %r" % calculDada.variableCalcular)        
+    print("Received petition for: ",calculDada.variableCalcular,calculDada.variableRebuda)        
     t = Thread(target=calcular, args=(ch, delivery_tag, calculDada))
     t.start()
     thrds.append(t)    
@@ -28,7 +28,8 @@ def callback(ch, method, properties, body, args):
 
 def calcular(ch, delivery_tag, calculDada):    
     global funcions
-    global valorsVariables
+    global valorsVariables    
+    ActualitzaValor(calculDada.variableRebuda,calculDada.valorRebut,calculDada.timestampRebut)    
     #Cerquem la funcio per calcular aquesta variable
     funcio = funcions.get(calculDada.variableCalcular)
     if funcio is None:
@@ -38,16 +39,22 @@ def calcular(ch, delivery_tag, calculDada):
     for nomVariable in funcio.Parametres:
         valorVariable = valorsVariables.get(nomVariable)
         nomParametre = funcio.Parametres[nomVariable]
-        if valorVariable is None or valorVariable.Timestamp < calculDada.timestampActual:
+        if valorVariable is None or valorVariable.Timestamp < calculDada.timestampAltres:
             #Demanar valor
             peticio = missatgesRPC_pb2.PeticioValor()
             peticio.nomVariable=nomVariable
+            peticio.timestampValor = calculDada.timestampAltres
             channelGRPC = grpc.insecure_channel(configGRPC['Host']+":"+str(configGRPC['Port']),options=(('grpc.enable_http_proxy', 0),))
             stubValorService = missatgesRPC_pb2_grpc.ValorServiceStub(channelGRPC)
             resultat = stubValorService.Valor(peticio);
+            if (not resultat.correcte):
+                print("El gestor no ha proporcionat el valor de ",nomVariable)
+                cb = functools.partial(ack_message_send_result, ch, delivery_tag,None)
+                ch.connection.add_callback_threadsafe(cb)
+                return
             #Crear nova variable amb valor i timestamp per no afectar les que s'estan calculant
-            valorVariable=ValorVariable(resultat.valor,resultat.timestampRebut)
-            ActualitzaValor(nomVariable,resultat.valor,resultat.timestampRebut)
+            valorVariable=ValorVariable(resultat.valor,calculDada.timestampRebut)
+            ActualitzaValor(nomVariable,resultat.valor,calculDada.timestampRebut)
         elif valorVariable.Timestamp > calculDada.timestampRebut:
             #Cancelar l'operacio, ja s'ha calculat aquesta variable en el futur        
             return
@@ -55,24 +62,26 @@ def calcular(ch, delivery_tag, calculDada):
     #Calcular
     resultatCalcul = getattr(funcionsCalculVariables,funcio.Name)(**parametres)
     #Actualitzar valor de la variable calculada
-    ActualitzaValor(calculDada.variableCalcular,resultatCalcul,calculDada.timestampActual)
+    ActualitzaValor(calculDada.variableCalcular,resultatCalcul,calculDada.timestampRebut)    
     #Informar del resultat del calcul
     payload = missatges_pb2.DadaCalculada()
     payload.nomVariable = calculDada.variableCalcular
     payload.valor = resultatCalcul
     payload.timestamp = calculDada.timestampRebut
-    cb = functools.partial(ack_message_send_result, ch, delivery_tag,payload)
+    cb = functools.partial(ack_message_send_result, ch, delivery_tag,payload.SerializeToString())
     ch.connection.add_callback_threadsafe(cb)
+    
     
 
     
 def ack_message_send_result(ch, delivery_tag, payload):    
-    global queueName
+    global exchange
     if ch.is_open:
         ch.basic_ack(delivery_tag)
-        ch.basic_publish(exchange='',
-            routing_key=queueName,
-            body=payload)
+        if payload is not None:
+            ch.basic_publish(exchange=exchange,
+                routing_key='resultatCalcul',
+                body=payload)
     else:        
         print("Channel for calculated data closed")
         pass
@@ -80,13 +89,16 @@ def ack_message_send_result(ch, delivery_tag, payload):
 
 def ActualitzaValor(nomVariable, valor, timestamp):
     global valorsVariables
+    print("Nou valor",nomVariable,valor,timestamp)
+    if nomVariable == '':
+        traceback.print_stack()
     valorsVariables[nomVariable]=ValorVariable(valor,timestamp)
 
 
     
 class Funcio:
     def __init__(self):
-        self.ReturnValue = ''
+        self.ReturnVariable = ''
         self.Name = ''
         self.Parametres = {}
 
@@ -111,7 +123,7 @@ except:
 	"RabbitMQCalculDades": {
 		"Host": "localhost",
 		"Port": 5672,
-		"Channel": "calculDades"
+		"Exchange": "calculDades"
 	},
     "GRPCValors": {
 		"Host": "localhost",
@@ -123,30 +135,30 @@ except:
   "FunctionsDefinition": {
     "Functions": [
       {
-        "ReturnValue": "PIE1_TEMP",
+        "ReturnVariable": "PIE1_TEMP",
         "Function": "TemperaturaPiezometre4500",
         "Parameters": [
           {
             "Name": "resistencia",
-            "AssociatedValue": "PIE1_RES"
+            "AssociatedVariable": "PIE1_RES"
           }
         ]
       },
       {
-        "ReturnValue": "PIE1_PRE",
+        "ReturnVariable": "PIE1_PRE",
             "Function": "PressioPiezometre4500",
         "Parameters": [
           {
             "Name": "periode",
-            "AssociatedValue": "PIE1_PER"
+            "AssociatedVariable": "PIE1_PER"
           },
           {
             "Name": "temperatura",
-            "AssociatedValue": "PIE1_TEMP"
+            "AssociatedVariable": "PIE1_TEMP"
           },
           {
             "Name": "pressioAtmosferica",
-            "AssociatedValue": "METEO_PRE"
+            "AssociatedVariable": "METEO_PRE"
           }
         ]
       }
@@ -158,7 +170,7 @@ configRabbitMQ=config['RabbitMQCalculDades']
 configGRPC=config['GRPCValors']
 valorsVariables = {}        
 funcions = {}
-queueName = configRabbitMQ['Channel']
+exchange = configRabbitMQ['Exchange']
 user = configRabbitMQ.get('User')
 password=configRabbitMQ.get('Password')
 if user is None:
@@ -170,23 +182,27 @@ for configFunction in configFunctions['FunctionsDefinition']['Functions']:
     function.Name = configFunction['Function']
     function.Parametres = {}
     for configParameter in configFunction['Parameters']: 
-        function.Parametres[configParameter['AssociatedValue']] = configParameter['Name']
-    funcions[configFunction['ReturnValue']] = function   
+        function.Parametres[configParameter['AssociatedVariable']] = configParameter['Name']
+    funcions[configFunction['ReturnVariable']] = function   
 
 while True:
     try:        
         channelGRPC = grpc.insecure_channel(configGRPC['Host']+":"+str(configGRPC['Port']),options=(('grpc.enable_http_proxy', 0),))
         stubValorService = missatgesRPC_pb2_grpc.ValorServiceStub(channelGRPC)
         peticio = missatgesRPC_pb2.PeticioValor()
-        peticio.nomVariable='TEST'
+        #Ask for a white variable to test it
+        peticio.nomVariable=''
         resultat = stubValorService.Valor(peticio);
         credentials = pika.PlainCredentials(user, password)
         connection = pika.BlockingConnection(pika.ConnectionParameters(host=configRabbitMQ['Host'],port=configRabbitMQ['Port'],credentials=credentials))
         channelRabbitMQ = connection.channel()
+        channelRabbitMQ.exchange_declare(exchange=exchange, exchange_type='direct', durable = True)
         print("Connected")
         threads = []
-        on_message_callback = functools.partial(callback, args=(threads))
-        channelRabbitMQ.queue_declare(queueName,durable=True)        
+        on_message_callback = functools.partial(callback, args=(threads))   
+        result = channelRabbitMQ.queue_declare(queue='',exclusive=True)
+        queueName = result.method.queue
+        channelRabbitMQ.queue_bind(exchange=exchange,queue=queueName,routing_key='peticioCalcul')
         channelRabbitMQ.basic_consume(queue=queueName, 
                       auto_ack=False,
                       on_message_callback=on_message_callback)        
@@ -201,8 +217,9 @@ while True:
             connection.close()
             exit
     except Exception as e:
+        traceback.print_exc()
         print(str(datetime.now()) + ": Connection failed "+str(e))
         print(e)
-        time.sleep(30)
+        time.sleep(10)
         continue
         

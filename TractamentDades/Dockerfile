@@ -19,6 +19,8 @@ RUN apk add --no-cache protoc
 COPY TractamentDades/tractament/ /service/tractament/
 
 RUN protoc -I=./protobufs --python_out=./tractament ./protobufs/missatges.proto
+RUN python -m grpc_tools.protoc --proto_path ./protobufs  --python_out=./tractament --grpc_python_out=./tractament missatgesRPC.proto
+
 
 WORKDIR /service/tractament
            

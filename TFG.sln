@@ -25,7 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solución",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Protobuf", "Protobufs\Protobuf.vcxitems", "{99353292-588A-4844-9969-A135D6F34A62}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magatzem", "Magatzem\Magatzem.csproj", "{A2900CB2-DF66-4D72-98B8-0B9D2A8856B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestorDades", "Magatzem\GestorDades.csproj", "{A2900CB2-DF66-4D72-98B8-0B9D2A8856B1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestorCalculs", "GestorCalculs\GestorCalculs.csproj", "{0979F357-B2D9-41F1-ACA0-4279083876B1}"
 EndProject

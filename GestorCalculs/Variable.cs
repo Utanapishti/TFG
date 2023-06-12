@@ -22,9 +22,9 @@ namespace GestorCalculs
             var novaDada = new Dada(valor, ts);
             lock(lockDada)
             {                
-                if (ts>ultimaDada.Timestamp)
+                if (ultimaDada==null || ts>ultimaDada.Timestamp)
                 {
-                    ultimaDada=novaDada;
+                    ultimaDada=novaDada;                    
                     return ultimaDada;
                 }
             }

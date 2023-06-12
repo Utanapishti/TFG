@@ -13,6 +13,7 @@ message PeticioValor
 message RespostaPeticioValor
 {
 	double valor=1;		
+	bool correcte=2;
 }
 
 service ValorService {

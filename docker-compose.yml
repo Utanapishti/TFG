@@ -7,7 +7,8 @@ services:
       context: .
       dockerfile: Generador/Dockerfile    
     environment:
-        Generador__Name: PIE1_RES
+        Generador__Name: A0
+        Generador__Interval: 5000
     depends_on:
       - 'rabbitmq'
     networks:
@@ -19,7 +20,8 @@ services:
       context: .
       dockerfile: Generador/Dockerfile    
     environment:
-        Generador__Name: PIE1_PER
+        Generador__Name: B0
+        Generador__Interval: 30000
     depends_on:
       - 'rabbitmq'
     networks:
@@ -31,15 +33,16 @@ services:
       context: .
       dockerfile: Generador/Dockerfile    
     environment:
-        Generador__Name: METEO_PRE
+        Generador__Name: C0
+        Generador__Interval: 30000
     depends_on:
       - 'rabbitmq'
     networks:
       - sensor_net
 
  
-  magatzem:
-    image: ${DOCKER_REGISTRY-}magatzem
+  gestordades:
+    image: ${DOCKER_REGISTRY-}gestordades
     build:
       context: .
       dockerfile: Magatzem/Dockerfile
@@ -57,7 +60,9 @@ services:
     networks:
         - sensor_net
     environment:
-        - PYTHONUNBUFFERED=1
+         PYTHONUNBUFFERED: 1
+         RabbitMQCalculDades__User: guest
+         RabbitMQCalculDades__Password: guest
 
   rabbitmq:    
     image: rabbitmq    

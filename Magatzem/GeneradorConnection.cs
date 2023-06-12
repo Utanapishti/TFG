@@ -7,6 +7,7 @@ public class GeneradorConnection : RabbitMQConnection
 {
     public GeneradorConnection(ILogger<RabbitMQConnection> logger, IOptions<GeneradorConnectionOptions> options) : base(logger, options)
     {
+        logger.LogInformation(options.Value.Host);
     }
 }
 

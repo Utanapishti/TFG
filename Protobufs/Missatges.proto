@@ -14,7 +14,7 @@ message CalculDada
 	string variableRebuda=2;
 	double valorRebut=3;	
 	uint32 timestampRebut=4;
-	uint32 timestampActual=5;
+	uint32 timestampAltres=5;
 }
 
 message DadaCalculada

@@ -2,30 +2,79 @@
   "FunctionsDefinition": {
     "Functions": [
       {
-        "ReturnValue": "PIE1_TEMP",
-        "Function": "TemperaturaPiezometre4500",
+        "ReturnVariable": "A1",
+        "Function": "Multiplica10",
         "Parameters": [
           {
-            "Name": "resistencia",
-            "AssociatedValue": "PIE1_RES"
+            "Name": "valor",
+            "AssociatedVariable": "A0"
           }
         ]
       },
       {
-        "ReturnValue": "PIE1_PRE",
+        "ReturnVariable": "B1",
+        "Function": "Multiplica100",
+        "Parameters": [
+          {
+            "Name": "valor",
+            "AssociatedVariable": "B0"
+          }
+        ]
+      },
+
+      {
+        "ReturnVariable": "C1",
+        "Function": "Multiplica100",
+        "Parameters": [
+          {
+            "Name": "valor",
+            "AssociatedVariable": "C0"
+          }
+        ]
+      },
+      {
+        "ReturnVariable": "Total",
+        "Function": "Suma",
+        "Parameters": [
+          {
+            "Name": "primer",
+            "AssociatedVariable": "A1"
+          },
+          {
+            "Name": "segon",
+            "AssociatedVariable": "B1"
+          },
+          {
+            "Name": "tercer",
+            "AssociatedVariable": "C0"
+          }
+        ]
+      },
+      {
+        "ReturnVariable": "PIE1_TEMP",
+        "Function": "TemperaturaPiezometre4500",
+        "Parameters": [
+          {
+            "Name": "resistencia",
+            "AssociatedVariable": "PIE1_RES"
+          }
+        ]
+      },
+      {
+        "ReturnVariable": "PIE1_PRE",
         "Function": "PressioPiezometre4500",
         "Parameters": [
           {
             "Name": "periode",
-            "AssociatedValue": "PIE1_PER"
+            "AssociatedVariable": "PIE1_PER"
           },
           {
             "Name": "temperatura",
-            "AssociatedValue": "PIE1_TEMP"
+            "AssociatedVariable": "PIE1_TEMP"
           },
           {
             "Name": "pressioAtmosferica",
-            "AssociatedValue": "METEO_PRE"
+            "AssociatedVariable": "METEO_PRE"
           }
         ]
       }

@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="buildProtocol.sh">
+    <None Update="buildProtocol.bat">
       <Generator></Generator>
     </None>
   </ItemGroup>
