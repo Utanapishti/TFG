@@ -67,6 +67,6 @@ spec:
     app: gestordades
   ports:
   - port: 5098
-    targetPort: 5098
+    targetPort: grpc
 
 

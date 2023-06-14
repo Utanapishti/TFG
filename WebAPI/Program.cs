@@ -20,13 +20,21 @@ var rpcChannel = new Channel(rpcHost + ":" + rpcPort.ToString(), ChannelCredenti
 var rpcClient = new StatusService.StatusServiceClient(rpcChannel);
 
 app.MapGet(
-    "/status", async ()=>
-{    
-        var resposta = rpcClient.GetStatus(new PeticioStatus());
+    "/status", () =>
+{
 
-        var resultat = await resposta.ResponseStream.ToListAsync();
+    var resposta = rpcClient.GetStatus(new PeticioStatus());
 
-        return resultat.Select(status => new Status(status.NomVariable,status.Valor,status.Timestamp)).ToArray(); 
+    var resultat = resposta.ResponseStream.ToListAsync().GetAwaiter().GetResult();
+
+    var inici = DateTime.UtcNow;
+    DateTime actual = DateTime.UtcNow;
+    while ((actual - inici) < TimeSpan.FromSeconds(1))
+    {
+        actual = DateTime.UtcNow;
+    }
+
+    return resultat.Select(status => new Status(status.NomVariable, status.Valor, status.Timestamp)).ToArray();
 });
 
 app.Run();
